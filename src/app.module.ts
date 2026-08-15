@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { RolesModule } from './modules/roles/roles.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { ClinicsModule } from './modules/clinics/clinics.module';
 import { RedisModule } from './shared/redis/redis.module';
 
 @Module({
@@ -14,7 +15,6 @@ import { RedisModule } from './shared/redis/redis.module';
     ConfigModule.forRoot({ isGlobal: true }),
     RedisModule,
     TypeOrmModule.forRootAsync({
-
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: 'postgres' as const,
@@ -30,7 +30,9 @@ import { RedisModule } from './shared/redis/redis.module';
     UsersModule,
     RolesModule,
     AuthModule,
+    ClinicsModule,
   ],
+
   controllers: [AppController],
   providers: [AppService],
 })
