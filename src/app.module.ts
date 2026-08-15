@@ -9,6 +9,7 @@ import { RolesModule } from './modules/roles/roles.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ClinicsModule } from './modules/clinics/clinics.module';
 import { BranchesModule } from './modules/branches/branches.module';
+import { StaffModule } from './modules/staff/staff.module';
 import { RedisModule } from './shared/redis/redis.module';
 
 @Module({
@@ -33,6 +34,7 @@ import { RedisModule } from './shared/redis/redis.module';
     AuthModule,
     ClinicsModule,
     BranchesModule,
+    StaffModule,
   ],
 
 
