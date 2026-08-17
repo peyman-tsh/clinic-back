@@ -37,6 +37,8 @@ describe('DeleteServiceCategoryUseCase', () => {
   it('throws ServiceCategoryNotFoundError if category does not exist', async () => {
     mockCategoryRepo.findById.mockResolvedValue(null);
 
-    await expect(useCase.execute('missing-id')).rejects.toThrow(ServiceCategoryNotFoundError);
+    await expect(useCase.execute('missing-id')).rejects.toThrow(
+      ServiceCategoryNotFoundError,
+    );
   });
 });

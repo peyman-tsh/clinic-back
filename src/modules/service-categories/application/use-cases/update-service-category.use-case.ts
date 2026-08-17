@@ -1,7 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ServiceCategorySlugAlreadyInUseError, ServiceCategoryNotFoundError } from '../../domain/errors/service-category.errors';
-import { SERVICE_CATEGORY_REPOSITORY, type ServiceCategoryRepository } from '../../domain/repositories/service-category.repository';
-import { ServiceCategoryOutput, UpdateServiceCategoryInput } from '../dto/service-category.dto';
+import {
+  ServiceCategorySlugAlreadyInUseError,
+  ServiceCategoryNotFoundError,
+} from '../../domain/errors/service-category.errors';
+import {
+  SERVICE_CATEGORY_REPOSITORY,
+  type ServiceCategoryRepository,
+} from '../../domain/repositories/service-category.repository';
+import {
+  ServiceCategoryOutput,
+  UpdateServiceCategoryInput,
+} from '../dto/service-category.dto';
 
 @Injectable()
 export class UpdateServiceCategoryUseCase {
@@ -10,7 +19,10 @@ export class UpdateServiceCategoryUseCase {
     private readonly categoriesRepo: ServiceCategoryRepository,
   ) {}
 
-  async execute(id: string, input: UpdateServiceCategoryInput): Promise<ServiceCategoryOutput> {
+  async execute(
+    id: string,
+    input: UpdateServiceCategoryInput,
+  ): Promise<ServiceCategoryOutput> {
     const category = await this.categoriesRepo.findById(id);
     if (!category) {
       throw new ServiceCategoryNotFoundError(id);
@@ -23,7 +35,10 @@ export class UpdateServiceCategoryUseCase {
       category.slug,
     );
     if (existingBySlug && existingBySlug.id !== id) {
-      throw new ServiceCategorySlugAlreadyInUseError(category.slug, category.clinicId);
+      throw new ServiceCategorySlugAlreadyInUseError(
+        category.slug,
+        category.clinicId,
+      );
     }
 
     await this.categoriesRepo.save(category);

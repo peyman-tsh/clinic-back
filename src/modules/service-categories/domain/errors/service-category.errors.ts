@@ -7,7 +7,9 @@ export class ServiceCategoryNotFoundError extends Error {
 
 export class ServiceCategorySlugAlreadyInUseError extends Error {
   constructor(slug: string, clinicId: string) {
-    super(`Service category slug "${slug}" is already in use for clinic "${clinicId}"`);
+    super(
+      `Service category slug "${slug}" is already in use for clinic "${clinicId}"`,
+    );
     this.name = 'ServiceCategorySlugAlreadyInUseError';
   }
 }

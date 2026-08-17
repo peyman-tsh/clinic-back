@@ -38,7 +38,9 @@ export class ServiceCategoriesController {
   @Post('service-categories')
   @ApiOperation({ summary: 'Create a new service category' })
   @ApiResponse({ status: 201, type: ServiceCategoryResponse })
-  async create(@Body() request: CreateServiceCategoryRequest): Promise<ServiceCategoryResponse> {
+  async create(
+    @Body() request: CreateServiceCategoryRequest,
+  ): Promise<ServiceCategoryResponse> {
     const output = await this.createCategory.execute(request);
     return ServiceCategoryResponse.from(output);
   }
@@ -54,7 +56,9 @@ export class ServiceCategoriesController {
   @Get('clinics/:clinicId/service-categories')
   @ApiOperation({ summary: 'Get service categories of a specific clinic' })
   @ApiResponse({ status: 200, type: [ServiceCategoryResponse] })
-  async findByClinic(@Param('clinicId') clinicId: string): Promise<ServiceCategoryResponse[]> {
+  async findByClinic(
+    @Param('clinicId') clinicId: string,
+  ): Promise<ServiceCategoryResponse[]> {
     const outputs = await this.findClinicCategories.execute(clinicId);
     return outputs.map((output) => ServiceCategoryResponse.from(output));
   }

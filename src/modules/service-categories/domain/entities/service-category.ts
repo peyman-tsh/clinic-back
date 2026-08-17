@@ -72,10 +72,14 @@ export class ServiceCategory {
       this.properties.slug = ServiceCategory.validateSlug(rawSlug);
     }
     if (input.description !== undefined) {
-      this.properties.description = ServiceCategory.normalizeOptionalText(input.description);
+      this.properties.description = ServiceCategory.normalizeOptionalText(
+        input.description,
+      );
     }
     if (input.imageUrl !== undefined) {
-      this.properties.imageUrl = ServiceCategory.normalizeOptionalText(input.imageUrl);
+      this.properties.imageUrl = ServiceCategory.normalizeOptionalText(
+        input.imageUrl,
+      );
     }
     if (input.sortOrder !== undefined) {
       this.properties.sortOrder = input.sortOrder;
@@ -149,7 +153,9 @@ export class ServiceCategory {
       throw new InvalidServiceCategoryError('Category name is required');
     }
     if (trimmed.length > 150) {
-      throw new InvalidServiceCategoryError('Category name cannot exceed 150 characters');
+      throw new InvalidServiceCategoryError(
+        'Category name cannot exceed 150 characters',
+      );
     }
     return trimmed;
   }
@@ -165,12 +171,16 @@ export class ServiceCategory {
       throw new InvalidServiceCategoryError('Category slug is invalid');
     }
     if (slugified.length > 150) {
-      throw new InvalidServiceCategoryError('Category slug cannot exceed 150 characters');
+      throw new InvalidServiceCategoryError(
+        'Category slug cannot exceed 150 characters',
+      );
     }
     return slugified;
   }
 
-  private static normalizeOptionalText(value: string | null | undefined): string | null {
+  private static normalizeOptionalText(
+    value: string | null | undefined,
+  ): string | null {
     if (value === null || value === undefined) return null;
     return value.trim() || null;
   }

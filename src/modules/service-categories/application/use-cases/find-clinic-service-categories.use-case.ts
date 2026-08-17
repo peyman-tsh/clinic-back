@@ -1,7 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CLINIC_REPOSITORY, type ClinicRepository } from '../../../clinics/domain/repositories/clinic.repository';
+import {
+  CLINIC_REPOSITORY,
+  type ClinicRepository,
+} from '../../../clinics/domain/repositories/clinic.repository';
 import { ClinicNotFoundError } from '../../../clinics/domain/errors/clinic.errors';
-import { SERVICE_CATEGORY_REPOSITORY, type ServiceCategoryRepository } from '../../domain/repositories/service-category.repository';
+import {
+  SERVICE_CATEGORY_REPOSITORY,
+  type ServiceCategoryRepository,
+} from '../../domain/repositories/service-category.repository';
 import { ServiceCategoryOutput } from '../dto/service-category.dto';
 
 @Injectable()

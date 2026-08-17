@@ -1,5 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { SERVICE_CATEGORY_REPOSITORY, type ServiceCategoryRepository } from '../../domain/repositories/service-category.repository';
+import {
+  SERVICE_CATEGORY_REPOSITORY,
+  type ServiceCategoryRepository,
+} from '../../domain/repositories/service-category.repository';
 import { ServiceCategoryOutput } from '../dto/service-category.dto';
 
 @Injectable()

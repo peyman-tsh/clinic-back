@@ -27,8 +27,14 @@ import { ServiceCategoriesController } from './presentation/http/service-categor
     FindServiceCategoriesUseCase,
     FindClinicServiceCategoriesUseCase,
     DeleteServiceCategoryUseCase,
-    { provide: SERVICE_CATEGORY_REPOSITORY, useClass: TypeOrmServiceCategoryRepository },
-    { provide: SERVICE_CATEGORY_ID_GENERATOR, useClass: UuidServiceCategoryIdGenerator },
+    {
+      provide: SERVICE_CATEGORY_REPOSITORY,
+      useClass: TypeOrmServiceCategoryRepository,
+    },
+    {
+      provide: SERVICE_CATEGORY_ID_GENERATOR,
+      useClass: UuidServiceCategoryIdGenerator,
+    },
   ],
   exports: [
     CreateServiceCategoryUseCase,

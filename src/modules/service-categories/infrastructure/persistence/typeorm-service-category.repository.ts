@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import type { Repository } from 'typeorm';
-import { ServiceCategory, ServiceCategoryProperties } from '../../domain/entities/service-category';
+import {
+  ServiceCategory,
+  ServiceCategoryProperties,
+} from '../../domain/entities/service-category';
 import { ServiceCategorySlugAlreadyInUseError } from '../../domain/errors/service-category.errors';
 import type { ServiceCategoryRepository } from '../../domain/repositories/service-category.repository';
 import { ServiceCategoryOrmEntity } from './service-category.orm-entity';
@@ -18,7 +21,10 @@ export class TypeOrmServiceCategoryRepository implements ServiceCategoryReposito
       await this.categoriesRepo.save(this.toEntity(category));
     } catch (error: unknown) {
       if (this.isUniqueViolation(error)) {
-        throw new ServiceCategorySlugAlreadyInUseError(category.slug, category.clinicId);
+        throw new ServiceCategorySlugAlreadyInUseError(
+          category.slug,
+          category.clinicId,
+        );
       }
       throw error;
     }
@@ -29,7 +35,10 @@ export class TypeOrmServiceCategoryRepository implements ServiceCategoryReposito
     return entity ? this.toDomain(entity) : null;
   }
 
-  async findByClinicIdAndSlug(clinicId: string, slug: string): Promise<ServiceCategory | null> {
+  async findByClinicIdAndSlug(
+    clinicId: string,
+    slug: string,
+  ): Promise<ServiceCategory | null> {
     const entity = await this.categoriesRepo
       .createQueryBuilder('category')
       .where('category.clinic_id = :clinicId', { clinicId })
@@ -96,7 +105,11 @@ export class TypeOrmServiceCategoryRepository implements ServiceCategoryReposito
   }
 
   private isUniqueViolation(error: unknown): boolean {
-    if (typeof error !== 'object' || error === null || !('driverError' in error)) {
+    if (
+      typeof error !== 'object' ||
+      error === null ||
+      !('driverError' in error)
+    ) {
       return false;
     }
 
