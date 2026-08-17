@@ -1,5 +1,19 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseFilters, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseFilters,
+  UseGuards,
+} from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { LoginUseCase } from '../../application/use-cases/login.use-case';
 import { RefreshTokenUseCase } from '../../application/use-cases/refresh-token.use-case';
 import { SignupUseCase } from '../../application/use-cases/signup.use-case';
@@ -32,7 +46,10 @@ export class AuthController {
   @Public()
   @Post('signup')
   @ApiOperation({ summary: 'Register a new user' })
-  @ApiResponse({ status: 201, description: 'User registered and tokens returned' })
+  @ApiResponse({
+    status: 201,
+    description: 'User registered and tokens returned',
+  })
   @ApiResponse({ status: 400, description: 'Invalid input' })
   @ApiResponse({ status: 409, description: 'Email already in use' })
   async signup(@Body() request: SignupRequest): Promise<LoginOutput> {
@@ -55,7 +72,9 @@ export class AuthController {
   @ApiOperation({ summary: 'Refresh access token' })
   @ApiResponse({ status: 200, description: 'New tokens returned' })
   @ApiResponse({ status: 401, description: 'Invalid/expired refresh token' })
-  async refresh(@Body() request: RefreshTokenRequest): Promise<AuthTokensOutput> {
+  async refresh(
+    @Body() request: RefreshTokenRequest,
+  ): Promise<AuthTokensOutput> {
     return this.refreshTokenUseCase.execute(request);
   }
 
@@ -64,7 +83,9 @@ export class AuthController {
   @ApiOperation({ summary: 'Get current authenticated user' })
   @ApiResponse({ status: 200, description: 'Current user profile' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async me(@CurrentUser() user: AuthenticatedUserView): Promise<AuthenticatedUserView> {
+  async me(
+    @CurrentUser() user: AuthenticatedUserView,
+  ): Promise<AuthenticatedUserView> {
     return user;
   }
 

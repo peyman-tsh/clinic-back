@@ -16,11 +16,7 @@ describe('SignupUseCase', () => {
     delete: jest.fn(),
   };
 
-  const subject = new SignupUseCase(
-    createUser as never,
-    tokens as never,
-    refreshTokens as never,
-  );
+  const subject = new SignupUseCase(createUser as never, tokens, refreshTokens);
 
   beforeEach(() => {
     jest.clearAllMocks();

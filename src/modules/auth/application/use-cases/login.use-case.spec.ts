@@ -25,9 +25,9 @@ describe('LoginUseCase', () => {
 
   const subject = new LoginUseCase(
     users as never,
-    passwords as never,
-    tokens as never,
-    refreshTokens as never,
+    passwords,
+    tokens,
+    refreshTokens,
   );
 
   beforeEach(() => {
@@ -74,7 +74,10 @@ describe('LoginUseCase', () => {
     users.findByEmail.mockResolvedValue(null);
 
     await expect(
-      subject.execute({ email: 'missing@example.com', password: 'whatever-pass' }),
+      subject.execute({
+        email: 'missing@example.com',
+        password: 'whatever-pass',
+      }),
     ).rejects.toBeInstanceOf(InvalidCredentialsError);
     expect(passwords.verify).not.toHaveBeenCalled();
   });

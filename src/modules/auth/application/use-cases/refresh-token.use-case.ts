@@ -16,7 +16,9 @@ export class RefreshTokenUseCase {
   ) {}
 
   async execute(input: RefreshTokenInput): Promise<AuthTokensOutput> {
-    const stored = await this.refreshTokens.findByRefreshToken(input.refreshToken);
+    const stored = await this.refreshTokens.findByRefreshToken(
+      input.refreshToken,
+    );
 
     if (!stored) {
       throw new InvalidRefreshTokenError();
@@ -41,7 +43,9 @@ export class RefreshTokenUseCase {
       token: accessTokenValue,
       refreshToken: refreshTokenValue,
       accessTokenExpiresInSeconds: Number(process.env.JWT_EXPIRES_IN ?? 3600),
-      refreshTokenExpiresInSeconds: Number(process.env.JWT_REFRESH_EXPIRES_IN ?? 604800),
+      refreshTokenExpiresInSeconds: Number(
+        process.env.JWT_REFRESH_EXPIRES_IN ?? 604800,
+      ),
     });
 
     await this.refreshTokens.delete(input.refreshToken);

@@ -1,4 +1,7 @@
-import { InvalidRefreshTokenError, TokenExpiredError } from '../errors/auth.errors';
+import {
+  InvalidRefreshTokenError,
+  TokenExpiredError,
+} from '../errors/auth.errors';
 
 export interface AccessTokenProperties {
   token: string;
@@ -20,8 +23,12 @@ export class AccessToken {
     return new AccessToken({
       token: input.token,
       refreshToken: input.refreshToken,
-      accessTokenExpiresAt: new Date(now.getTime() + input.accessTokenExpiresInSeconds * 1000),
-      refreshTokenExpiresAt: new Date(now.getTime() + input.refreshTokenExpiresInSeconds * 1000),
+      accessTokenExpiresAt: new Date(
+        now.getTime() + input.accessTokenExpiresInSeconds * 1000,
+      ),
+      refreshTokenExpiresAt: new Date(
+        now.getTime() + input.refreshTokenExpiresInSeconds * 1000,
+      ),
     });
   }
 

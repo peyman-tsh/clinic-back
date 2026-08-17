@@ -45,18 +45,29 @@ export class SignupRequest {
   @Length(3, 32)
   phone?: string;
 
-  @ApiPropertyOptional({ description: 'Avatar URL', example: 'https://example.com/avatar.png' })
+  @ApiPropertyOptional({
+    description: 'Avatar URL',
+    example: 'https://example.com/avatar.png',
+  })
   @IsOptional()
   @IsUrl()
   avatar?: string;
 
-  @ApiPropertyOptional({ description: 'Timezone (IANA)', example: 'Asia/Tehran', default: 'UTC' })
+  @ApiPropertyOptional({
+    description: 'Timezone (IANA)',
+    example: 'Asia/Tehran',
+    default: 'UTC',
+  })
   @IsOptional()
   @IsString()
   @Length(1, 64)
   timezone?: string;
 
-  @ApiPropertyOptional({ description: 'Language code', example: 'fa', default: 'en' })
+  @ApiPropertyOptional({
+    description: 'Language code',
+    example: 'fa',
+    default: 'en',
+  })
   @IsOptional()
   @IsString()
   @Length(2, 10)

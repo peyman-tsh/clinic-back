@@ -31,7 +31,9 @@ export class JwtAuthGuard implements CanActivate {
     const authHeader = request.headers.authorization as string | undefined;
 
     if (!authHeader?.startsWith('Bearer ')) {
-      throw new UnauthorizedException('Missing or invalid Authorization header');
+      throw new UnauthorizedException(
+        'Missing or invalid Authorization header',
+      );
     }
 
     const token = authHeader.slice(7);

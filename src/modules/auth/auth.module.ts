@@ -23,7 +23,8 @@ import { RolesGuard } from './presentation/http/guards/roles.guard';
       useFactory: (config: ConfigService) => ({
         secret: config.getOrThrow<string>('JWT_SECRET'),
         signOptions: {
-          expiresIn: (config.get<string>('JWT_EXPIRES_IN') ?? '1h') as SignOptions['expiresIn'],
+          expiresIn: (config.get<string>('JWT_EXPIRES_IN') ??
+            '1h') as SignOptions['expiresIn'],
         },
       }),
     }),
@@ -36,8 +37,11 @@ import { RolesGuard } from './presentation/http/guards/roles.guard';
     JwtAuthGuard,
     RolesGuard,
     { provide: TOKEN_GENERATOR, useClass: JwtTokenGenerator },
-    { provide: REFRESH_TOKEN_REPOSITORY, useClass: RedisRefreshTokenRepository },
+    {
+      provide: REFRESH_TOKEN_REPOSITORY,
+      useClass: RedisRefreshTokenRepository,
+    },
   ],
   exports: [JwtAuthGuard, RolesGuard, TOKEN_GENERATOR],
 })
-export class AuthModule {}
+export class AuthModule {}

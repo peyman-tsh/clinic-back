@@ -15,7 +15,8 @@ export class JwtTokenGenerator implements TokenGenerator {
   }): Promise<string> {
     const options: SignOptions = {
       subject: payload.sub,
-      expiresIn: (process.env.JWT_EXPIRES_IN ?? '1h') as SignOptions['expiresIn'],
+      expiresIn: (process.env.JWT_EXPIRES_IN ??
+        '1h') as SignOptions['expiresIn'],
     };
     return this.jwtService.signAsync(
       { email: payload.email, roles: payload.roles },
@@ -23,11 +24,15 @@ export class JwtTokenGenerator implements TokenGenerator {
     );
   }
 
-  async signRefreshToken(payload: { sub: string; jti: string }): Promise<string> {
+  async signRefreshToken(payload: {
+    sub: string;
+    jti: string;
+  }): Promise<string> {
     const options: SignOptions = {
       subject: payload.sub,
       jwtid: payload.jti,
-      expiresIn: (process.env.JWT_REFRESH_EXPIRES_IN ?? '7d') as SignOptions['expiresIn'],
+      expiresIn: (process.env.JWT_REFRESH_EXPIRES_IN ??
+        '7d') as SignOptions['expiresIn'],
     };
     return this.jwtService.signAsync({}, options);
   }
@@ -52,9 +57,14 @@ export class JwtTokenGenerator implements TokenGenerator {
     }
   }
 
-  async verifyRefreshToken(token: string): Promise<{ sub: string; jti: string }> {
+  async verifyRefreshToken(
+    token: string,
+  ): Promise<{ sub: string; jti: string }> {
     try {
-      const payload = await this.jwtService.verifyAsync<{ sub: string; jti: string }>(token);
+      const payload = await this.jwtService.verifyAsync<{
+        sub: string;
+        jti: string;
+      }>(token);
       return payload;
     } catch (error) {
       if (error instanceof Error && error.name === 'TokenExpiredError') {

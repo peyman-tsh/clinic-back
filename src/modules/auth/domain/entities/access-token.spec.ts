@@ -14,8 +14,12 @@ describe('AccessToken', () => {
 
     expect(token.token).toBe('access-token');
     expect(token.refreshToken).toBe('refresh-token');
-    expect(token.accessTokenExpiresAt.getTime()).toBeGreaterThanOrEqual(now + 3600 * 1000);
-    expect(token.refreshTokenExpiresAt.getTime()).toBeGreaterThanOrEqual(now + 604800 * 1000);
+    expect(token.accessTokenExpiresAt.getTime()).toBeGreaterThanOrEqual(
+      now + 3600 * 1000,
+    );
+    expect(token.refreshTokenExpiresAt.getTime()).toBeGreaterThanOrEqual(
+      now + 604800 * 1000,
+    );
     expect(token.isAccessTokenExpired()).toBe(false);
     expect(token.isRefreshTokenExpired()).toBe(false);
 

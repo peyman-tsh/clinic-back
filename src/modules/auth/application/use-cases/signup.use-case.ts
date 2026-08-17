@@ -43,7 +43,9 @@ export class SignupUseCase {
       token: accessTokenValue,
       refreshToken: refreshTokenValue,
       accessTokenExpiresInSeconds: Number(process.env.JWT_EXPIRES_IN ?? 3600),
-      refreshTokenExpiresInSeconds: Number(process.env.JWT_REFRESH_EXPIRES_IN ?? 604800),
+      refreshTokenExpiresInSeconds: Number(
+        process.env.JWT_REFRESH_EXPIRES_IN ?? 604800,
+      ),
     });
 
     await this.refreshTokens.save(token);

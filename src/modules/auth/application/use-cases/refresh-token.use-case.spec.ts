@@ -1,4 +1,7 @@
-import { InvalidRefreshTokenError, TokenExpiredError } from '../../domain/errors/auth.errors';
+import {
+  InvalidRefreshTokenError,
+  TokenExpiredError,
+} from '../../domain/errors/auth.errors';
 import { AccessToken } from '../../domain/entities/access-token';
 import { RefreshTokenUseCase } from './refresh-token.use-case';
 
@@ -15,10 +18,7 @@ describe('RefreshTokenUseCase', () => {
     verifyRefreshToken: jest.fn(),
   };
 
-  const subject = new RefreshTokenUseCase(
-    refreshTokens as never,
-    tokens as never,
-  );
+  const subject = new RefreshTokenUseCase(refreshTokens, tokens);
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -35,7 +35,10 @@ describe('RefreshTokenUseCase', () => {
     });
 
     refreshTokens.findByRefreshToken.mockResolvedValue(stored);
-    tokens.verifyRefreshToken.mockResolvedValue({ sub: 'user_1', jti: 'jti_1' });
+    tokens.verifyRefreshToken.mockResolvedValue({
+      sub: 'user_1',
+      jti: 'jti_1',
+    });
     tokens.signAccessToken.mockResolvedValue('new-access-token');
     tokens.signRefreshToken.mockResolvedValue('new-refresh-token');
     refreshTokens.delete.mockResolvedValue(undefined);
@@ -45,7 +48,9 @@ describe('RefreshTokenUseCase', () => {
       refreshToken: 'valid-refresh-token',
     });
 
-    expect(tokens.verifyRefreshToken).toHaveBeenCalledWith('valid-refresh-token');
+    expect(tokens.verifyRefreshToken).toHaveBeenCalledWith(
+      'valid-refresh-token',
+    );
     expect(tokens.signAccessToken).toHaveBeenCalledWith({
       sub: 'user_1',
       email: '',

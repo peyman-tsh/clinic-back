@@ -6,9 +6,7 @@ import { REDIS_CLIENT } from '../../../../shared/redis/redis.module';
 
 @Injectable()
 export class RedisRefreshTokenRepository implements RefreshTokenRepository {
-  constructor(
-    @Inject(REDIS_CLIENT) private readonly redis: Redis,
-  ) {}
+  constructor(@Inject(REDIS_CLIENT) private readonly redis: Redis) {}
 
   private getKey(refreshToken: string): string {
     return `refresh_token:${refreshToken}`;
