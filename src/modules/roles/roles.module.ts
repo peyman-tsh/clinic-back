@@ -43,7 +43,11 @@ import { RolesController } from './presentation/http/roles.controller';
       RolePermissionOrmEntity,
     ]),
   ],
-  controllers: [RolesController, PermissionsController, RoleAssignmentsController],
+  controllers: [
+    RolesController,
+    PermissionsController,
+    RoleAssignmentsController,
+  ],
   providers: [
     CreateRoleUseCase,
     FindRolesUseCase,

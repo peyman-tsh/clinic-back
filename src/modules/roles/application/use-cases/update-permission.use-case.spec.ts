@@ -15,7 +15,7 @@ describe('UpdatePermissionUseCase', () => {
     delete: jest.fn(),
   };
 
-  const subject = new UpdatePermissionUseCase(permissions as never);
+  const subject = new UpdatePermissionUseCase(permissions);
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -52,7 +52,10 @@ describe('UpdatePermissionUseCase', () => {
 
     const output = await subject.execute('perm_1', { description: 'New' });
 
-    expect(permissions.findByModuleAndName).toHaveBeenCalledWith('users', 'read');
+    expect(permissions.findByModuleAndName).toHaveBeenCalledWith(
+      'users',
+      'read',
+    );
     expect(permissions.save).toHaveBeenCalledWith(perm);
     expect(output).toMatchObject({
       id: 'perm_1',

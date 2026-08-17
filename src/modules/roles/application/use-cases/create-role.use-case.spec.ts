@@ -12,7 +12,7 @@ describe('CreateRoleUseCase', () => {
   };
   const ids = { generate: jest.fn() };
 
-  const subject = new CreateRoleUseCase(roles as never, ids as never);
+  const subject = new CreateRoleUseCase(roles, ids);
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -52,9 +52,9 @@ describe('CreateRoleUseCase', () => {
       }),
     );
 
-    await expect(
-      subject.execute({ name: 'Admin' }),
-    ).rejects.toBeInstanceOf(RoleNameAlreadyInUseError);
+    await expect(subject.execute({ name: 'Admin' })).rejects.toBeInstanceOf(
+      RoleNameAlreadyInUseError,
+    );
     expect(roles.save).not.toHaveBeenCalled();
   });
 

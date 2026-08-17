@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import type { Repository } from 'typeorm';
-import { Permission, PermissionProperties } from '../../domain/entities/permission';
+import {
+  Permission,
+  PermissionProperties,
+} from '../../domain/entities/permission';
 import { PermissionAlreadyInUseError } from '../../domain/errors/role.errors';
 import type { PermissionRepository } from '../../domain/repositories/permission.repository';
 import { PermissionOrmEntity } from './permission.orm-entity';
@@ -44,7 +47,10 @@ export class TypeOrmPermissionRepository implements PermissionRepository {
       );
     } catch (error: unknown) {
       if (this.isUniqueViolation(error)) {
-        throw new PermissionAlreadyInUseError(permission.module, permission.name);
+        throw new PermissionAlreadyInUseError(
+          permission.module,
+          permission.name,
+        );
       }
       throw error;
     }
@@ -68,7 +74,11 @@ export class TypeOrmPermissionRepository implements PermissionRepository {
   }
 
   private isUniqueViolation(error: unknown): boolean {
-    if (typeof error !== 'object' || error === null || !('driverError' in error)) {
+    if (
+      typeof error !== 'object' ||
+      error === null ||
+      !('driverError' in error)
+    ) {
       return false;
     }
     const { driverError } = error;

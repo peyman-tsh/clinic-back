@@ -12,7 +12,7 @@ describe('CreatePermissionUseCase', () => {
   };
   const ids = { generate: jest.fn() };
 
-  const subject = new CreatePermissionUseCase(permissions as never, ids as never);
+  const subject = new CreatePermissionUseCase(permissions, ids);
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -30,7 +30,10 @@ describe('CreatePermissionUseCase', () => {
     });
 
     expect(ids.generate).toHaveBeenCalledTimes(1);
-    expect(permissions.findByModuleAndName).toHaveBeenCalledWith('users', 'read');
+    expect(permissions.findByModuleAndName).toHaveBeenCalledWith(
+      'users',
+      'read',
+    );
     expect(permissions.save).toHaveBeenCalledTimes(1);
     expect(output).toMatchObject({
       id: 'perm_1',

@@ -11,7 +11,7 @@ describe('FindRoleUseCase', () => {
     delete: jest.fn(),
   };
 
-  const subject = new FindRoleUseCase(roles as never);
+  const subject = new FindRoleUseCase(roles);
 
   beforeEach(() => {
     jest.clearAllMocks();

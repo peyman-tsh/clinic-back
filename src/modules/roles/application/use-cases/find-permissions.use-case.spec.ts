@@ -10,7 +10,7 @@ describe('FindPermissionsUseCase', () => {
     delete: jest.fn(),
   };
 
-  const subject = new FindPermissionsUseCase(permissions as never);
+  const subject = new FindPermissionsUseCase(permissions);
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -41,8 +41,16 @@ describe('FindPermissionsUseCase', () => {
 
     expect(permissions.findAll).toHaveBeenCalledTimes(1);
     expect(output).toHaveLength(2);
-    expect(output[0]).toMatchObject({ id: 'perm_1', name: 'read', module: 'users' });
-    expect(output[1]).toMatchObject({ id: 'perm_2', name: 'write', module: 'users' });
+    expect(output[0]).toMatchObject({
+      id: 'perm_1',
+      name: 'read',
+      module: 'users',
+    });
+    expect(output[1]).toMatchObject({
+      id: 'perm_2',
+      name: 'write',
+      module: 'users',
+    });
   });
 
   it('returns an empty array when no permissions exist', async () => {

@@ -32,9 +32,9 @@ describe('AssignPermissionToRoleUseCase', () => {
   };
 
   const subject = new AssignPermissionToRoleUseCase(
-    roles as never,
-    permissions as never,
-    assignments as never,
+    roles,
+    permissions,
+    assignments,
   );
 
   beforeEach(() => {
@@ -44,9 +44,9 @@ describe('AssignPermissionToRoleUseCase', () => {
   it('throws RoleNotFoundError when the role is missing', async () => {
     roles.findById.mockResolvedValue(null);
 
-    await expect(
-      subject.execute('role_1', 'perm_1'),
-    ).rejects.toBeInstanceOf(RoleNotFoundError);
+    await expect(subject.execute('role_1', 'perm_1')).rejects.toBeInstanceOf(
+      RoleNotFoundError,
+    );
     expect(assignments.assignPermission).not.toHaveBeenCalled();
   });
 
@@ -63,9 +63,9 @@ describe('AssignPermissionToRoleUseCase', () => {
     );
     permissions.findById.mockResolvedValue(null);
 
-    await expect(
-      subject.execute('role_1', 'perm_1'),
-    ).rejects.toBeInstanceOf(PermissionNotFoundError);
+    await expect(subject.execute('role_1', 'perm_1')).rejects.toBeInstanceOf(
+      PermissionNotFoundError,
+    );
     expect(assignments.assignPermission).not.toHaveBeenCalled();
   });
 
@@ -95,6 +95,9 @@ describe('AssignPermissionToRoleUseCase', () => {
 
     await subject.execute('role_1', 'perm_1');
 
-    expect(assignments.assignPermission).toHaveBeenCalledWith('role_1', 'perm_1');
+    expect(assignments.assignPermission).toHaveBeenCalledWith(
+      'role_1',
+      'perm_1',
+    );
   });
 });

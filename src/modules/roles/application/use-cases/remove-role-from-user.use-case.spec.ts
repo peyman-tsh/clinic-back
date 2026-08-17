@@ -23,10 +23,7 @@ describe('RemoveRoleFromUserUseCase', () => {
     findRolesForUser: jest.fn(),
   };
 
-  const subject = new RemoveRoleFromUserUseCase(
-    roles as never,
-    assignments as never,
-  );
+  const subject = new RemoveRoleFromUserUseCase(roles, assignments);
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -35,9 +32,9 @@ describe('RemoveRoleFromUserUseCase', () => {
   it('throws RoleNotFoundError when the role is missing', async () => {
     roles.findById.mockResolvedValue(null);
 
-    await expect(
-      subject.execute('user_1', 'role_1'),
-    ).rejects.toBeInstanceOf(RoleNotFoundError);
+    await expect(subject.execute('user_1', 'role_1')).rejects.toBeInstanceOf(
+      RoleNotFoundError,
+    );
     expect(assignments.removeUser).not.toHaveBeenCalled();
   });
 
@@ -54,9 +51,9 @@ describe('RemoveRoleFromUserUseCase', () => {
     );
     assignments.userExists.mockResolvedValue(false);
 
-    await expect(
-      subject.execute('user_1', 'role_1'),
-    ).rejects.toBeInstanceOf(RoleUserNotFoundError);
+    await expect(subject.execute('user_1', 'role_1')).rejects.toBeInstanceOf(
+      RoleUserNotFoundError,
+    );
     expect(assignments.removeUser).not.toHaveBeenCalled();
   });
 

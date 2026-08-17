@@ -21,7 +21,7 @@ describe('FindRolePermissionsUseCase', () => {
     findRolesForUser: jest.fn(),
   };
 
-  const subject = new FindRolePermissionsUseCase(roles as never, assignments as never);
+  const subject = new FindRolePermissionsUseCase(roles, assignments);
 
   beforeEach(() => {
     jest.clearAllMocks();

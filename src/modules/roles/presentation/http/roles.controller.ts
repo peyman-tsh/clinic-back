@@ -43,7 +43,10 @@ export class RolesController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new role' })
-  @ApiCreatedResponse({ description: 'Role created successfully', type: RoleResponse })
+  @ApiCreatedResponse({
+    description: 'Role created successfully',
+    type: RoleResponse,
+  })
   async create(@Body() request: CreateRoleRequest): Promise<RoleResponse> {
     return RoleResponse.from(await this.createRole.execute(request));
   }
@@ -64,7 +67,10 @@ export class RolesController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update a role' })
-  @ApiOkResponse({ description: 'Role updated successfully', type: RoleResponse })
+  @ApiOkResponse({
+    description: 'Role updated successfully',
+    type: RoleResponse,
+  })
   async update(
     @Param('id') id: string,
     @Body() request: UpdateRoleRequest,

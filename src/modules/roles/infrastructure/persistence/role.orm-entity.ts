@@ -1,4 +1,10 @@
-import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { RolePermissionOrmEntity } from './role-permission.orm-entity';
 import { UserRoleOrmEntity } from './user-role.orm-entity';
 

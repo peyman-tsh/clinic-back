@@ -17,7 +17,8 @@ export class RemoveRoleFromUserUseCase {
   ) {}
 
   async execute(userId: string, roleId: string): Promise<void> {
-    if (!(await this.roles.findById(roleId))) throw new RoleNotFoundError(roleId);
+    if (!(await this.roles.findById(roleId)))
+      throw new RoleNotFoundError(roleId);
     if (!(await this.assignments.userExists(userId))) {
       throw new RoleUserNotFoundError(userId);
     }

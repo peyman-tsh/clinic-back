@@ -46,7 +46,9 @@ export class Role {
     }
 
     if (input.description !== undefined) {
-      this.properties.description = Role.normalizeDescription(input.description);
+      this.properties.description = Role.normalizeDescription(
+        input.description,
+      );
     }
 
     this.properties.updatedAt = new Date();
@@ -76,7 +78,9 @@ export class Role {
     const normalized = name.trim();
 
     if (normalized.length < 2 || normalized.length > 100) {
-      throw new InvalidRoleError('Role name must contain between 2 and 100 characters');
+      throw new InvalidRoleError(
+        'Role name must contain between 2 and 100 characters',
+      );
     }
 
     return normalized;
@@ -92,7 +96,9 @@ export class Role {
     if (!normalized) return null;
 
     if (normalized.length > 500) {
-      throw new InvalidRoleError('Role description cannot exceed 500 characters');
+      throw new InvalidRoleError(
+        'Role description cannot exceed 500 characters',
+      );
     }
 
     return normalized;

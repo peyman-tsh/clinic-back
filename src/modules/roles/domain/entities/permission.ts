@@ -54,7 +54,9 @@ export class Permission {
     }
 
     if (input.description !== undefined) {
-      this.properties.description = Permission.normalizeDescription(input.description);
+      this.properties.description = Permission.normalizeDescription(
+        input.description,
+      );
     }
 
     this.properties.updatedAt = new Date();

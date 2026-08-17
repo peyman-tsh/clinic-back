@@ -10,7 +10,9 @@ import { RoleOutput, toRoleOutput, UpdateRoleInput } from '../dto/role.dto';
 
 @Injectable()
 export class UpdateRoleUseCase {
-  constructor(@Inject(ROLE_REPOSITORY) private readonly roles: RoleRepository) {}
+  constructor(
+    @Inject(ROLE_REPOSITORY) private readonly roles: RoleRepository,
+  ) {}
 
   async execute(id: string, input: UpdateRoleInput): Promise<RoleOutput> {
     if (Object.values(input).every((value) => value === undefined)) {

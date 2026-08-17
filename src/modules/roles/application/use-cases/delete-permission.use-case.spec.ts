@@ -11,7 +11,7 @@ describe('DeletePermissionUseCase', () => {
     delete: jest.fn(),
   };
 
-  const subject = new DeletePermissionUseCase(permissions as never);
+  const subject = new DeletePermissionUseCase(permissions);
 
   beforeEach(() => {
     jest.clearAllMocks();

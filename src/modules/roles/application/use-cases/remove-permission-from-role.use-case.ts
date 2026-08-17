@@ -21,7 +21,8 @@ export class RemovePermissionFromRoleUseCase {
   ) {}
 
   async execute(roleId: string, permissionId: string): Promise<void> {
-    if (!(await this.roles.findById(roleId))) throw new RoleNotFoundError(roleId);
+    if (!(await this.roles.findById(roleId)))
+      throw new RoleNotFoundError(roleId);
     if (!(await this.permissions.findById(permissionId))) {
       throw new PermissionNotFoundError(permissionId);
     }

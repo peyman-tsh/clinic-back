@@ -15,7 +15,10 @@ export class FindRolePermissionsUseCase {
   ) {}
 
   async execute(roleId: string): Promise<PermissionOutput[]> {
-    if (!(await this.roles.findById(roleId))) throw new RoleNotFoundError(roleId);
-    return (await this.assignments.findPermissions(roleId)).map(toPermissionOutput);
+    if (!(await this.roles.findById(roleId)))
+      throw new RoleNotFoundError(roleId);
+    return (await this.assignments.findPermissions(roleId)).map(
+      toPermissionOutput,
+    );
   }
 }

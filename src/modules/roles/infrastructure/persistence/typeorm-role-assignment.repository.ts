@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import type { Repository } from 'typeorm';
-import { Permission, PermissionProperties } from '../../domain/entities/permission';
+import {
+  Permission,
+  PermissionProperties,
+} from '../../domain/entities/permission';
 import { Role, RoleProperties } from '../../domain/entities/role';
 import type { RoleAssignmentRepository } from '../../domain/repositories/role-assignment.repository';
 import { UserOrmEntity } from '../../../users/infrastructure/persistence/user.orm-entity';
@@ -9,9 +12,7 @@ import { RolePermissionOrmEntity } from './role-permission.orm-entity';
 import { UserRoleOrmEntity } from './user-role.orm-entity';
 
 @Injectable()
-export class TypeOrmRoleAssignmentRepository
-  implements RoleAssignmentRepository
-{
+export class TypeOrmRoleAssignmentRepository implements RoleAssignmentRepository {
   constructor(
     @InjectRepository(UserOrmEntity)
     private readonly users: Repository<UserOrmEntity>,
@@ -77,7 +78,9 @@ export class TypeOrmRoleAssignmentRepository
       .map((assignment) => this.toRoleDomain(assignment.role));
   }
 
-  private toPermissionDomain(entity: RolePermissionOrmEntity['permission']): Permission {
+  private toPermissionDomain(
+    entity: RolePermissionOrmEntity['permission'],
+  ): Permission {
     const properties: PermissionProperties = {
       id: entity.id,
       name: entity.name,

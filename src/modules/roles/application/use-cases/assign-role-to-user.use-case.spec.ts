@@ -1,5 +1,8 @@
 import { Role } from '../../domain/entities/role';
-import { RoleNotFoundError, RoleUserNotFoundError } from '../../domain/errors/role.errors';
+import {
+  RoleNotFoundError,
+  RoleUserNotFoundError,
+} from '../../domain/errors/role.errors';
 import { AssignRoleToUserUseCase } from './assign-role-to-user.use-case';
 
 describe('AssignRoleToUserUseCase', () => {
@@ -20,7 +23,7 @@ describe('AssignRoleToUserUseCase', () => {
     findRolesForUser: jest.fn(),
   };
 
-  const subject = new AssignRoleToUserUseCase(roles as never, assignments as never);
+  const subject = new AssignRoleToUserUseCase(roles, assignments);
 
   beforeEach(() => {
     jest.clearAllMocks();

@@ -6,7 +6,9 @@ import { RoleOutput, toRoleOutput } from '../dto/role.dto';
 
 @Injectable()
 export class FindRoleUseCase {
-  constructor(@Inject(ROLE_REPOSITORY) private readonly roles: RoleRepository) {}
+  constructor(
+    @Inject(ROLE_REPOSITORY) private readonly roles: RoleRepository,
+  ) {}
 
   async execute(id: string): Promise<RoleOutput> {
     const role = await this.roles.findById(id);

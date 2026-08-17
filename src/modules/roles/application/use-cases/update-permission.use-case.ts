@@ -24,7 +24,9 @@ export class UpdatePermissionUseCase {
     input: UpdatePermissionInput,
   ): Promise<PermissionOutput> {
     if (Object.values(input).every((value) => value === undefined)) {
-      throw new InvalidPermissionError('At least one permission field must be provided');
+      throw new InvalidPermissionError(
+        'At least one permission field must be provided',
+      );
     }
 
     const permission = await this.permissions.findById(id);

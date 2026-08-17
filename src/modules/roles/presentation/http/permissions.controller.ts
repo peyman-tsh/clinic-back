@@ -35,7 +35,9 @@ export class PermissionsController {
   async create(
     @Body() request: CreatePermissionRequest,
   ): Promise<PermissionResponse> {
-    return PermissionResponse.from(await this.createPermission.execute(request));
+    return PermissionResponse.from(
+      await this.createPermission.execute(request),
+    );
   }
 
   @Get()

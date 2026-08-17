@@ -1,4 +1,10 @@
-import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { RolePermissionOrmEntity } from './role-permission.orm-entity';
 
 @Entity({ name: 'permissions' })
@@ -24,6 +30,9 @@ export class PermissionOrmEntity {
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamptz', nullable: true })
   deletedAt!: Date | null;
 
-  @OneToMany(() => RolePermissionOrmEntity, (assignment) => assignment.permission)
+  @OneToMany(
+    () => RolePermissionOrmEntity,
+    (assignment) => assignment.permission,
+  )
   roleAssignments!: RolePermissionOrmEntity[];
 }

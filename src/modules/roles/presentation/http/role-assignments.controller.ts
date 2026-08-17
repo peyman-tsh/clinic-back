@@ -52,7 +52,9 @@ export class RoleAssignmentsController {
   async findRolePermissions(
     @Param('roleId') roleId: string,
   ): Promise<PermissionResponse[]> {
-    return (await this.findPermissions.execute(roleId)).map(PermissionResponse.from);
+    return (await this.findPermissions.execute(roleId)).map(
+      PermissionResponse.from,
+    );
   }
 
   @Post('users/:userId/roles/:roleId')
