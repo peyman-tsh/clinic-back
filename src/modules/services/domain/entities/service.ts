@@ -62,7 +62,10 @@ export class Service {
     const rawSlug = input.slug?.trim() || name;
     const slug = Service.validateSlug(rawSlug);
     const price = Service.validatePrice(input.price);
-    const depositAmount = Service.validateDepositAmount(input.depositAmount, price);
+    const depositAmount = Service.validateDepositAmount(
+      input.depositAmount,
+      price,
+    );
 
     return new Service({
       id: Service.validateUuid(input.id, 'ID'),
@@ -72,9 +75,18 @@ export class Service {
       slug,
       description: Service.normalizeOptionalText(input.description),
       imageUrl: Service.normalizeOptionalText(input.imageUrl),
-      durationMinutes: Service.validateDuration(input.durationMinutes, 'Duration'),
-      bufferBeforeMinutes: Service.validateNonNegative(input.bufferBeforeMinutes ?? 0, 'Buffer before'),
-      bufferAfterMinutes: Service.validateNonNegative(input.bufferAfterMinutes ?? 0, 'Buffer after'),
+      durationMinutes: Service.validateDuration(
+        input.durationMinutes,
+        'Duration',
+      ),
+      bufferBeforeMinutes: Service.validateNonNegative(
+        input.bufferBeforeMinutes ?? 0,
+        'Buffer before',
+      ),
+      bufferAfterMinutes: Service.validateNonNegative(
+        input.bufferAfterMinutes ?? 0,
+        'Buffer after',
+      ),
       price,
       depositAmount,
       isActive: input.isActive ?? true,
@@ -91,7 +103,10 @@ export class Service {
 
   update(input: UpdateServiceProperties): void {
     if (input.categoryId !== undefined) {
-      this.properties.categoryId = Service.validateUuid(input.categoryId, 'Category ID');
+      this.properties.categoryId = Service.validateUuid(
+        input.categoryId,
+        'Category ID',
+      );
     }
     if (input.name !== undefined) {
       this.properties.name = Service.validateName(input.name);
@@ -101,26 +116,43 @@ export class Service {
       this.properties.slug = Service.validateSlug(rawSlug);
     }
     if (input.description !== undefined) {
-      this.properties.description = Service.normalizeOptionalText(input.description);
+      this.properties.description = Service.normalizeOptionalText(
+        input.description,
+      );
     }
     if (input.imageUrl !== undefined) {
       this.properties.imageUrl = Service.normalizeOptionalText(input.imageUrl);
     }
     if (input.durationMinutes !== undefined) {
-      this.properties.durationMinutes = Service.validateDuration(input.durationMinutes, 'Duration');
+      this.properties.durationMinutes = Service.validateDuration(
+        input.durationMinutes,
+        'Duration',
+      );
     }
     if (input.bufferBeforeMinutes !== undefined) {
-      this.properties.bufferBeforeMinutes = Service.validateNonNegative(input.bufferBeforeMinutes, 'Buffer before');
+      this.properties.bufferBeforeMinutes = Service.validateNonNegative(
+        input.bufferBeforeMinutes,
+        'Buffer before',
+      );
     }
     if (input.bufferAfterMinutes !== undefined) {
-      this.properties.bufferAfterMinutes = Service.validateNonNegative(input.bufferAfterMinutes, 'Buffer after');
+      this.properties.bufferAfterMinutes = Service.validateNonNegative(
+        input.bufferAfterMinutes,
+        'Buffer after',
+      );
     }
     if (input.price !== undefined) {
       this.properties.price = Service.validatePrice(input.price);
     }
     if (input.depositAmount !== undefined || input.price !== undefined) {
-      const currentDeposit = input.depositAmount !== undefined ? input.depositAmount : this.properties.depositAmount;
-      this.properties.depositAmount = Service.validateDepositAmount(currentDeposit, this.properties.price);
+      const currentDeposit =
+        input.depositAmount !== undefined
+          ? input.depositAmount
+          : this.properties.depositAmount;
+      this.properties.depositAmount = Service.validateDepositAmount(
+        currentDeposit,
+        this.properties.price,
+      );
     }
     if (input.sortOrder !== undefined) {
       this.properties.sortOrder = input.sortOrder;
@@ -133,7 +165,11 @@ export class Service {
   }
 
   get totalOccupiedMinutes(): number {
-    return this.properties.bufferBeforeMinutes + this.properties.durationMinutes + this.properties.bufferAfterMinutes;
+    return (
+      this.properties.bufferBeforeMinutes +
+      this.properties.durationMinutes +
+      this.properties.bufferAfterMinutes
+    );
   }
 
   get id(): string {
@@ -222,7 +258,9 @@ export class Service {
       throw new InvalidServiceError('Service name is required');
     }
     if (trimmed.length > 150) {
-      throw new InvalidServiceError('Service name cannot exceed 150 characters');
+      throw new InvalidServiceError(
+        'Service name cannot exceed 150 characters',
+      );
     }
     return trimmed;
   }
@@ -238,14 +276,18 @@ export class Service {
       throw new InvalidServiceError('Service slug is invalid');
     }
     if (slugified.length > 150) {
-      throw new InvalidServiceError('Service slug cannot exceed 150 characters');
+      throw new InvalidServiceError(
+        'Service slug cannot exceed 150 characters',
+      );
     }
     return slugified;
   }
 
   private static validateDuration(minutes: number, fieldName: string): number {
     if (minutes === undefined || minutes === null || minutes <= 0) {
-      throw new InvalidServiceError(`${fieldName} must be a positive integer greater than zero`);
+      throw new InvalidServiceError(
+        `${fieldName} must be a positive integer greater than zero`,
+      );
     }
     return minutes;
   }
@@ -264,18 +306,25 @@ export class Service {
     return price;
   }
 
-  private static validateDepositAmount(deposit: number | null | undefined, price: number): number | null {
+  private static validateDepositAmount(
+    deposit: number | null | undefined,
+    price: number,
+  ): number | null {
     if (deposit === null || deposit === undefined) return null;
     if (deposit < 0) {
       throw new InvalidServiceError('Deposit amount cannot be negative');
     }
     if (deposit > price) {
-      throw new InvalidServiceError('Deposit amount cannot exceed service price');
+      throw new InvalidServiceError(
+        'Deposit amount cannot exceed service price',
+      );
     }
     return deposit;
   }
 
-  private static normalizeOptionalText(value: string | null | undefined): string | null {
+  private static normalizeOptionalText(
+    value: string | null | undefined,
+  ): string | null {
     if (value === null || value === undefined) return null;
     return value.trim() || null;
   }

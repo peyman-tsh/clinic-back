@@ -1,6 +1,9 @@
 import { CreateServiceUseCase } from './create-service.use-case';
 import { Service } from '../../domain/entities/service';
-import { CategoryDoesNotBelongToClinicError, ServiceSlugAlreadyInUseError } from '../../domain/errors/service.errors';
+import {
+  CategoryDoesNotBelongToClinicError,
+  ServiceSlugAlreadyInUseError,
+} from '../../domain/errors/service.errors';
 import type { ServiceRepository } from '../../domain/repositories/service.repository';
 import type { ServiceIdGenerator } from '../ports/service-id-generator';
 import type { ClinicRepository } from '../../../clinics/domain/repositories/clinic.repository';

@@ -29,7 +29,10 @@ export class TypeOrmServiceRepository implements ServiceRepository {
     return entity ? this.toDomain(entity) : null;
   }
 
-  async findByClinicIdAndSlug(clinicId: string, slug: string): Promise<Service | null> {
+  async findByClinicIdAndSlug(
+    clinicId: string,
+    slug: string,
+  ): Promise<Service | null> {
     const entity = await this.servicesRepo
       .createQueryBuilder('service')
       .where('service.clinic_id = :clinicId', { clinicId })
@@ -117,7 +120,11 @@ export class TypeOrmServiceRepository implements ServiceRepository {
   }
 
   private isUniqueViolation(error: unknown): boolean {
-    if (typeof error !== 'object' || error === null || !('driverError' in error)) {
+    if (
+      typeof error !== 'object' ||
+      error === null ||
+      !('driverError' in error)
+    ) {
       return false;
     }
 

@@ -1,7 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CategoryDoesNotBelongToClinicError, ServiceNotFoundError, ServiceSlugAlreadyInUseError } from '../../domain/errors/service.errors';
-import { SERVICE_REPOSITORY, type ServiceRepository } from '../../domain/repositories/service.repository';
-import { SERVICE_CATEGORY_REPOSITORY, type ServiceCategoryRepository } from '../../../service-categories/domain/repositories/service-category.repository';
+import {
+  CategoryDoesNotBelongToClinicError,
+  ServiceNotFoundError,
+  ServiceSlugAlreadyInUseError,
+} from '../../domain/errors/service.errors';
+import {
+  SERVICE_REPOSITORY,
+  type ServiceRepository,
+} from '../../domain/repositories/service.repository';
+import {
+  SERVICE_CATEGORY_REPOSITORY,
+  type ServiceCategoryRepository,
+} from '../../../service-categories/domain/repositories/service-category.repository';
 import { ServiceCategoryNotFoundError } from '../../../service-categories/domain/errors/service-category.errors';
 import { ServiceOutput, UpdateServiceInput } from '../dto/service.dto';
 
@@ -20,13 +30,19 @@ export class UpdateServiceUseCase {
       throw new ServiceNotFoundError(id);
     }
 
-    if (input.categoryId !== undefined && input.categoryId !== service.categoryId) {
+    if (
+      input.categoryId !== undefined &&
+      input.categoryId !== service.categoryId
+    ) {
       const category = await this.categoriesRepo.findById(input.categoryId);
       if (!category) {
         throw new ServiceCategoryNotFoundError(input.categoryId);
       }
       if (category.clinicId !== service.clinicId) {
-        throw new CategoryDoesNotBelongToClinicError(input.categoryId, service.clinicId);
+        throw new CategoryDoesNotBelongToClinicError(
+          input.categoryId,
+          service.clinicId,
+        );
       }
     }
 

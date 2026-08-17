@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ServiceNotFoundError } from '../../domain/errors/service.errors';
-import { SERVICE_REPOSITORY, type ServiceRepository } from '../../domain/repositories/service.repository';
+import {
+  SERVICE_REPOSITORY,
+  type ServiceRepository,
+} from '../../domain/repositories/service.repository';
 import { ServiceOutput } from '../dto/service.dto';
 
 @Injectable()

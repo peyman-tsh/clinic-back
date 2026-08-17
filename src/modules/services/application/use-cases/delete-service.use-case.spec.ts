@@ -41,6 +41,8 @@ describe('DeleteServiceUseCase', () => {
   it('throws ServiceNotFoundError if service does not exist', async () => {
     mockServicesRepo.findById.mockResolvedValue(null);
 
-    await expect(useCase.execute('missing-id')).rejects.toThrow(ServiceNotFoundError);
+    await expect(useCase.execute('missing-id')).rejects.toThrow(
+      ServiceNotFoundError,
+    );
   });
 });

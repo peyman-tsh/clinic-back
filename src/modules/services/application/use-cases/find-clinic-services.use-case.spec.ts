@@ -34,10 +34,7 @@ describe('FindClinicServicesUseCase', () => {
       delete: jest.fn(),
     };
 
-    useCase = new FindClinicServicesUseCase(
-      mockServicesRepo,
-      mockClinicsRepo,
-    );
+    useCase = new FindClinicServicesUseCase(mockServicesRepo, mockClinicsRepo);
   });
 
   it('returns all services belonging to a valid clinic', async () => {
