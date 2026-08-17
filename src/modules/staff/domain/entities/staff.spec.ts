@@ -56,7 +56,9 @@ describe('Staff Entity', () => {
 
     expect(staff.branches).toHaveLength(2);
     expect(staff.primaryBranch?.branchId).toBe('branch-uuid-2');
-    expect(staff.branches.find((b) => b.branchId === 'branch-uuid-1')?.isPrimary).toBe(false);
+    expect(
+      staff.branches.find((b) => b.branchId === 'branch-uuid-1')?.isPrimary,
+    ).toBe(false);
   });
 
   it('removes assigned branch', () => {

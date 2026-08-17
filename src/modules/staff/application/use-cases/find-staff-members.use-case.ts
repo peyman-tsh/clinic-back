@@ -1,6 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { STAFF_REPOSITORY, type StaffRepository } from '../../domain/repositories/staff.repository';
-import { CLINIC_REPOSITORY, type ClinicRepository } from '../../../clinics/domain/repositories/clinic.repository';
+import {
+  STAFF_REPOSITORY,
+  type StaffRepository,
+} from '../../domain/repositories/staff.repository';
+import {
+  CLINIC_REPOSITORY,
+  type ClinicRepository,
+} from '../../../clinics/domain/repositories/clinic.repository';
 import { ClinicNotFoundError } from '../../../clinics/domain/errors/clinic.errors';
 import { StaffOutput } from '../dto/staff.dto';
 

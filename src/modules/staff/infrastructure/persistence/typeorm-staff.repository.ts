@@ -1,8 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import type { Repository } from 'typeorm';
-import { Staff, StaffBranchProperties, StaffProperties } from '../../domain/entities/staff';
-import { StaffBranchAlreadyAssignedError, UserAlreadyHasStaffProfileError } from '../../domain/errors/staff.errors';
+import {
+  Staff,
+  StaffBranchProperties,
+  StaffProperties,
+} from '../../domain/entities/staff';
+import {
+  StaffBranchAlreadyAssignedError,
+  UserAlreadyHasStaffProfileError,
+} from '../../domain/errors/staff.errors';
 import type { StaffRepository } from '../../domain/repositories/staff.repository';
 import { StaffOrmEntity } from './staff.orm-entity';
 import { StaffBranchOrmEntity } from './staff-branch.orm-entity';
@@ -100,13 +107,15 @@ export class TypeOrmStaffRepository implements StaffRepository {
   }
 
   private toDomain(entity: StaffOrmEntity): Staff {
-    const branches: StaffBranchProperties[] = (entity.branches ?? []).map((b) => ({
-      id: b.id,
-      staffId: b.staffId,
-      branchId: b.branchId,
-      isPrimary: b.isPrimary,
-      createdAt: b.createdAt,
-    }));
+    const branches: StaffBranchProperties[] = (entity.branches ?? []).map(
+      (b) => ({
+        id: b.id,
+        staffId: b.staffId,
+        branchId: b.branchId,
+        isPrimary: b.isPrimary,
+        createdAt: b.createdAt,
+      }),
+    );
 
     const properties: StaffProperties = {
       id: entity.id,
@@ -144,7 +153,11 @@ export class TypeOrmStaffRepository implements StaffRepository {
   }
 
   private isUniqueViolation(error: unknown): boolean {
-    if (typeof error !== 'object' || error === null || !('driverError' in error)) {
+    if (
+      typeof error !== 'object' ||
+      error === null ||
+      !('driverError' in error)
+    ) {
       return false;
     }
 

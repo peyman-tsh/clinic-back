@@ -49,9 +49,15 @@ export class StaffController {
 
   @Get('staff')
   @ApiOperation({ summary: 'Get all staff members' })
-  @ApiQuery({ name: 'clinicId', required: false, description: 'Filter staff by clinic UUID' })
+  @ApiQuery({
+    name: 'clinicId',
+    required: false,
+    description: 'Filter staff by clinic UUID',
+  })
   @ApiResponse({ status: 200, type: [StaffResponse] })
-  async findAll(@Query('clinicId') clinicId?: string): Promise<StaffResponse[]> {
+  async findAll(
+    @Query('clinicId') clinicId?: string,
+  ): Promise<StaffResponse[]> {
     const outputs = await this.findStaffMembers.execute(clinicId);
     return outputs.map((output) => StaffResponse.from(output));
   }
@@ -59,7 +65,9 @@ export class StaffController {
   @Get('clinics/:clinicId/staff')
   @ApiOperation({ summary: 'Get staff members by clinic ID' })
   @ApiResponse({ status: 200, type: [StaffResponse] })
-  async findByClinic(@Param('clinicId') clinicId: string): Promise<StaffResponse[]> {
+  async findByClinic(
+    @Param('clinicId') clinicId: string,
+  ): Promise<StaffResponse[]> {
     const outputs = await this.findStaffMembers.execute(clinicId);
     return outputs.map((output) => StaffResponse.from(output));
   }

@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { StaffNotFoundError } from '../../domain/errors/staff.errors';
-import { STAFF_REPOSITORY, type StaffRepository } from '../../domain/repositories/staff.repository';
+import {
+  STAFF_REPOSITORY,
+  type StaffRepository,
+} from '../../domain/repositories/staff.repository';
 
 @Injectable()
 export class DeleteStaffUseCase {

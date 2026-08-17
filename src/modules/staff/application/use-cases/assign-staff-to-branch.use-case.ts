@@ -1,10 +1,19 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { StaffNotFoundError } from '../../domain/errors/staff.errors';
-import { BRANCH_REPOSITORY, type BranchRepository } from '../../../branches/domain/repositories/branch.repository';
+import {
+  BRANCH_REPOSITORY,
+  type BranchRepository,
+} from '../../../branches/domain/repositories/branch.repository';
 import { BranchNotFoundError } from '../../../branches/domain/errors/branch.errors';
-import { STAFF_REPOSITORY, type StaffRepository } from '../../domain/repositories/staff.repository';
+import {
+  STAFF_REPOSITORY,
+  type StaffRepository,
+} from '../../domain/repositories/staff.repository';
 import { AssignBranchInput, StaffOutput } from '../dto/staff.dto';
-import { STAFF_ID_GENERATOR, type StaffIdGenerator } from '../ports/staff-id-generator';
+import {
+  STAFF_ID_GENERATOR,
+  type StaffIdGenerator,
+} from '../ports/staff-id-generator';
 
 @Injectable()
 export class AssignStaffToBranchUseCase {

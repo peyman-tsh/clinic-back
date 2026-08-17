@@ -41,7 +41,10 @@ describe('RemoveStaffFromBranchUseCase', () => {
 
     const result = await useCase.execute('staff-uuid-1', 'branch-uuid-1');
     expect(result.branches).toHaveLength(0);
-    expect(mockStaffRepo.removeBranch).toHaveBeenCalledWith('staff-uuid-1', 'branch-uuid-1');
+    expect(mockStaffRepo.removeBranch).toHaveBeenCalledWith(
+      'staff-uuid-1',
+      'branch-uuid-1',
+    );
   });
 
   it('throws StaffNotFoundError if staff member does not exist', async () => {

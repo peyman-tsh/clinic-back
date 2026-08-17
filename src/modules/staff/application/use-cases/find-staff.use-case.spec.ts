@@ -39,6 +39,8 @@ describe('FindStaffUseCase', () => {
   it('throws StaffNotFoundError if staff member does not exist', async () => {
     mockStaffRepo.findById.mockResolvedValue(null);
 
-    await expect(useCase.execute('missing-id')).rejects.toThrow(StaffNotFoundError);
+    await expect(useCase.execute('missing-id')).rejects.toThrow(
+      StaffNotFoundError,
+    );
   });
 });

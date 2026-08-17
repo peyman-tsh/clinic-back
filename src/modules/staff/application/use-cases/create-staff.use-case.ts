@@ -1,13 +1,25 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Staff } from '../../domain/entities/staff';
 import { UserAlreadyHasStaffProfileError } from '../../domain/errors/staff.errors';
-import { STAFF_REPOSITORY, type StaffRepository } from '../../domain/repositories/staff.repository';
-import { CLINIC_REPOSITORY, type ClinicRepository } from '../../../clinics/domain/repositories/clinic.repository';
-import { USER_REPOSITORY, type UserRepository } from '../../../users/domain/repositories/user.repository';
+import {
+  STAFF_REPOSITORY,
+  type StaffRepository,
+} from '../../domain/repositories/staff.repository';
+import {
+  CLINIC_REPOSITORY,
+  type ClinicRepository,
+} from '../../../clinics/domain/repositories/clinic.repository';
+import {
+  USER_REPOSITORY,
+  type UserRepository,
+} from '../../../users/domain/repositories/user.repository';
 import { ClinicNotFoundError } from '../../../clinics/domain/errors/clinic.errors';
 import { UserNotFoundError } from '../../../users/domain/errors/user.errors';
 import { CreateStaffInput, StaffOutput } from '../dto/staff.dto';
-import { STAFF_ID_GENERATOR, type StaffIdGenerator } from '../ports/staff-id-generator';
+import {
+  STAFF_ID_GENERATOR,
+  type StaffIdGenerator,
+} from '../ports/staff-id-generator';
 
 @Injectable()
 export class CreateStaffUseCase {

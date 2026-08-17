@@ -86,7 +86,9 @@ export class Staff {
       this.properties.bio = Staff.normalizeOptionalText(input.bio);
     }
     if (input.licenseNumber !== undefined) {
-      this.properties.licenseNumber = Staff.normalizeOptionalText(input.licenseNumber);
+      this.properties.licenseNumber = Staff.normalizeOptionalText(
+        input.licenseNumber,
+      );
     }
     if (input.color !== undefined) {
       this.properties.color = Staff.validateHexColor(input.color);
@@ -190,18 +192,24 @@ export class Staff {
     return trimmed;
   }
 
-  private static validateHexColor(color: string | null | undefined): string | null {
+  private static validateHexColor(
+    color: string | null | undefined,
+  ): string | null {
     if (color === null || color === undefined) return null;
     const trimmed = color.trim();
     if (!trimmed) return null;
 
     if (!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(trimmed)) {
-      throw new InvalidStaffError('Color must be a valid hex code (e.g. #FF5733)');
+      throw new InvalidStaffError(
+        'Color must be a valid hex code (e.g. #FF5733)',
+      );
     }
     return trimmed;
   }
 
-  private static normalizeOptionalText(value: string | null | undefined): string | null {
+  private static normalizeOptionalText(
+    value: string | null | undefined,
+  ): string | null {
     if (value === null || value === undefined) return null;
     return value.trim() || null;
   }

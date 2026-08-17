@@ -49,7 +49,11 @@ describe('FindStaffMembersUseCase', () => {
 
   it('returns staff members filtered by clinic ID', async () => {
     mockClinicsRepo.findById.mockResolvedValue(mockClinic);
-    const s1 = Staff.create({ id: '1', userId: 'u1', clinicId: 'clinic-uuid-1' });
+    const s1 = Staff.create({
+      id: '1',
+      userId: 'u1',
+      clinicId: 'clinic-uuid-1',
+    });
 
     mockStaffRepo.findByClinicId.mockResolvedValue([s1]);
 

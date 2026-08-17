@@ -39,6 +39,8 @@ describe('DeleteStaffUseCase', () => {
   it('throws StaffNotFoundError if staff profile does not exist', async () => {
     mockStaffRepo.findById.mockResolvedValue(null);
 
-    await expect(useCase.execute('missing-id')).rejects.toThrow(StaffNotFoundError);
+    await expect(useCase.execute('missing-id')).rejects.toThrow(
+      StaffNotFoundError,
+    );
   });
 });

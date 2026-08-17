@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { StaffBranchOutput, StaffOutput } from '../../../application/dto/staff.dto';
+import {
+  StaffBranchOutput,
+  StaffOutput,
+} from '../../../application/dto/staff.dto';
 import { StaffStatus } from '../../../domain/entities/staff';
 
 export class StaffBranchResponse {
@@ -26,37 +29,75 @@ export class StaffBranchResponse {
 }
 
 export class StaffResponse {
-  @ApiProperty({ description: 'Staff UUID', example: '550e8400-e29b-41d4-a716-446655440000' })
+  @ApiProperty({
+    description: 'Staff UUID',
+    example: '550e8400-e29b-41d4-a716-446655440000',
+  })
   id!: string;
 
-  @ApiProperty({ description: 'Associated User account UUID', example: '550e8400-e29b-41d4-a716-446655440001' })
+  @ApiProperty({
+    description: 'Associated User account UUID',
+    example: '550e8400-e29b-41d4-a716-446655440001',
+  })
   userId!: string;
 
-  @ApiProperty({ description: 'Parent Clinic UUID', example: '550e8400-e29b-41d4-a716-446655440002' })
+  @ApiProperty({
+    description: 'Parent Clinic UUID',
+    example: '550e8400-e29b-41d4-a716-446655440002',
+  })
   clinicId!: string;
 
-  @ApiProperty({ description: 'Job title', example: 'Senior Dermatologist', nullable: true })
+  @ApiProperty({
+    description: 'Job title',
+    example: 'Senior Dermatologist',
+    nullable: true,
+  })
   jobTitle!: string | null;
 
-  @ApiProperty({ description: 'Public biography', example: 'Specialist in cosmetic laser procedures', nullable: true })
+  @ApiProperty({
+    description: 'Public biography',
+    example: 'Specialist in cosmetic laser procedures',
+    nullable: true,
+  })
   bio!: string | null;
 
-  @ApiProperty({ description: 'Professional license number', example: 'LIC-987654', nullable: true })
+  @ApiProperty({
+    description: 'Professional license number',
+    example: 'LIC-987654',
+    nullable: true,
+  })
   licenseNumber!: string | null;
 
-  @ApiProperty({ description: 'Calendar display color', example: '#3357FF', nullable: true })
+  @ApiProperty({
+    description: 'Calendar display color',
+    example: '#3357FF',
+    nullable: true,
+  })
   color!: string | null;
 
-  @ApiProperty({ description: 'Staff status', enum: StaffStatus, example: 'active' })
+  @ApiProperty({
+    description: 'Staff status',
+    enum: StaffStatus,
+    example: 'active',
+  })
   status!: StaffStatus;
 
-  @ApiProperty({ description: 'Assigned branches', type: [StaffBranchResponse] })
+  @ApiProperty({
+    description: 'Assigned branches',
+    type: [StaffBranchResponse],
+  })
   branches!: StaffBranchResponse[];
 
-  @ApiProperty({ description: 'Creation timestamp', example: '2026-01-01T00:00:00.000Z' })
+  @ApiProperty({
+    description: 'Creation timestamp',
+    example: '2026-01-01T00:00:00.000Z',
+  })
   createdAt!: string;
 
-  @ApiProperty({ description: 'Last update timestamp', example: '2026-01-01T00:00:00.000Z' })
+  @ApiProperty({
+    description: 'Last update timestamp',
+    example: '2026-01-01T00:00:00.000Z',
+  })
   updatedAt!: string;
 
   static from(output: StaffOutput): StaffResponse {
