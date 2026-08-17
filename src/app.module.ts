@@ -12,6 +12,7 @@ import { BranchesModule } from './modules/branches/branches.module';
 import { StaffModule } from './modules/staff/staff.module';
 import { ServiceCategoriesModule } from './modules/service-categories/service-categories.module';
 import { ServicesModule } from './modules/services/services.module';
+import { StaffServicesModule } from './modules/staff-services/staff-services.module';
 import { RedisModule } from './shared/redis/redis.module';
 
 @Module({
@@ -39,8 +40,8 @@ import { RedisModule } from './shared/redis/redis.module';
     StaffModule,
     ServiceCategoriesModule,
     ServicesModule,
+    StaffServicesModule,
   ],
-
 
   controllers: [AppController],
   providers: [AppService],
