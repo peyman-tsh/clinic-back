@@ -29,7 +29,9 @@ describe('Staff API (e2e)', () => {
 
     dataSource = moduleFixture.get(DataSource);
     if (dataSource?.isInitialized) {
-      await dataSource.query('TRUNCATE TABLE users, clinics, branches, staff, staff_branches CASCADE');
+      await dataSource.query(
+        'TRUNCATE TABLE users, clinics, branches, staff, staff_branches CASCADE',
+      );
     }
 
     const signupRes = await request(app.getHttpServer())
@@ -72,7 +74,9 @@ describe('Staff API (e2e)', () => {
 
   afterAll(async () => {
     if (dataSource?.isInitialized) {
-      await dataSource.query('TRUNCATE TABLE users, clinics, branches, staff, staff_branches CASCADE');
+      await dataSource.query(
+        'TRUNCATE TABLE users, clinics, branches, staff, staff_branches CASCADE',
+      );
     }
     if (app) {
       await app.close();
@@ -174,12 +178,8 @@ describe('Staff API (e2e)', () => {
 
     const staffId = created.body.id;
 
-    await request(app.getHttpServer())
-      .delete(`/staff/${staffId}`)
-      .expect(204);
+    await request(app.getHttpServer()).delete(`/staff/${staffId}`).expect(204);
 
-    await request(app.getHttpServer())
-      .get(`/staff/${staffId}`)
-      .expect(404);
+    await request(app.getHttpServer()).get(`/staff/${staffId}`).expect(404);
   });
 });

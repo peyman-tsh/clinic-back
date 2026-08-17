@@ -28,7 +28,9 @@ describe('Services API (e2e)', () => {
 
     dataSource = moduleFixture.get(DataSource);
     if (dataSource?.isInitialized) {
-      await dataSource.query('TRUNCATE TABLE clinics, service_categories, services CASCADE');
+      await dataSource.query(
+        'TRUNCATE TABLE clinics, service_categories, services CASCADE',
+      );
     }
 
     const clinicRes = await request(app.getHttpServer())
@@ -57,7 +59,9 @@ describe('Services API (e2e)', () => {
 
   afterAll(async () => {
     if (dataSource?.isInitialized) {
-      await dataSource.query('TRUNCATE TABLE clinics, service_categories, services CASCADE');
+      await dataSource.query(
+        'TRUNCATE TABLE clinics, service_categories, services CASCADE',
+      );
     }
     if (app) {
       await app.close();

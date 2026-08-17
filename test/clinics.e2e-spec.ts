@@ -125,8 +125,6 @@ describe('Clinics API (e2e)', () => {
       .delete(`/clinics/${clinicId}`)
       .expect(204);
 
-    await request(app.getHttpServer())
-      .get(`/clinics/${clinicId}`)
-      .expect(404);
+    await request(app.getHttpServer()).get(`/clinics/${clinicId}`).expect(404);
   });
 });

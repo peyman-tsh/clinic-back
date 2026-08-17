@@ -100,7 +100,9 @@ describe('Roles and permissions API (e2e)', () => {
 
   async function cleanDatabase(): Promise<void> {
     if (dataSource?.isInitialized) {
-      await dataSource.query('TRUNCATE TABLE users, roles, permissions CASCADE');
+      await dataSource.query(
+        'TRUNCATE TABLE users, roles, permissions CASCADE',
+      );
     }
   }
 });

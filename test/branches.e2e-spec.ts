@@ -162,8 +162,6 @@ describe('Branches API (e2e)', () => {
       .delete(`/branches/${branchId}`)
       .expect(204);
 
-    await request(app.getHttpServer())
-      .get(`/branches/${branchId}`)
-      .expect(404);
+    await request(app.getHttpServer()).get(`/branches/${branchId}`).expect(404);
   });
 });
