@@ -6,11 +6,13 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { ClinicOrmEntity } from '../../../clinics/infrastructure/persistence/clinic.orm-entity';
 import { ServiceCategoryOrmEntity } from '../../../service-categories/infrastructure/persistence/service-category.orm-entity';
+import { StaffServiceOrmEntity } from '../../../staff-services/infrastructure/persistence/staff-service.orm-entity';
 
 @Entity({ name: 'services' })
 @Index('services_clinic_id_idx', ['clinicId'])
@@ -59,7 +61,10 @@ export class ServiceOrmEntity {
     type: 'numeric',
     precision: 10,
     scale: 2,
-    transformer: { to: (val: number) => val, from: (val: string) => parseFloat(val) },
+    transformer: {
+      to: (val: number) => val,
+      from: (val: string) => parseFloat(val),
+    },
   })
   price!: number;
 
@@ -69,7 +74,10 @@ export class ServiceOrmEntity {
     precision: 10,
     scale: 2,
     nullable: true,
-    transformer: { to: (val: number | null) => val, from: (val: string | null) => (val ? parseFloat(val) : null) },
+    transformer: {
+      to: (val: number | null) => val,
+      from: (val: string | null) => (val ? parseFloat(val) : null),
+    },
   })
   depositAmount!: number | null;
 
@@ -87,4 +95,10 @@ export class ServiceOrmEntity {
 
   @DeleteDateColumn({ name: 'deleted_at', type: 'timestamptz', nullable: true })
   deletedAt!: Date | null;
+
+  @OneToMany(
+    () => StaffServiceOrmEntity,
+    (staffService) => staffService.service,
+  )
+  staffServices!: StaffServiceOrmEntity[];
 }

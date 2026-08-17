@@ -15,6 +15,7 @@ import { StaffStatus } from '../../domain/entities/staff';
 import { UserOrmEntity } from '../../../users/infrastructure/persistence/user.orm-entity';
 import { ClinicOrmEntity } from '../../../clinics/infrastructure/persistence/clinic.orm-entity';
 import { StaffBranchOrmEntity } from './staff-branch.orm-entity';
+import { StaffServiceOrmEntity } from '../../../staff-services/infrastructure/persistence/staff-service.orm-entity';
 
 @Entity({ name: 'staff' })
 @Index('staff_clinic_id_idx', ['clinicId'])
@@ -43,7 +44,12 @@ export class StaffOrmEntity {
   @Column({ type: 'text', nullable: true })
   bio!: string | null;
 
-  @Column({ name: 'license_number', type: 'varchar', length: 100, nullable: true })
+  @Column({
+    name: 'license_number',
+    type: 'varchar',
+    length: 100,
+    nullable: true,
+  })
   licenseNumber!: string | null;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
@@ -69,4 +75,7 @@ export class StaffOrmEntity {
     cascade: true,
   })
   branches!: StaffBranchOrmEntity[];
+
+  @OneToMany(() => StaffServiceOrmEntity, (staffService) => staffService.staff)
+  services!: StaffServiceOrmEntity[];
 }
