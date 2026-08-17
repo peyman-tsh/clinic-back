@@ -7,9 +7,7 @@ import {
   UsernameAlreadyInUseError,
   UserNotFoundError,
 } from '../../domain/errors/user.errors';
-import {
-  USER_REPOSITORY,
-} from '../../domain/repositories/user.repository';
+import { USER_REPOSITORY } from '../../domain/repositories/user.repository';
 import type { UserRepository } from '../../domain/repositories/user.repository';
 import { toUserOutput, UpdateUserInput, UserOutput } from '../dto/user.dto';
 import { USER_PASSWORD_HASHER } from '../ports/password-hasher';

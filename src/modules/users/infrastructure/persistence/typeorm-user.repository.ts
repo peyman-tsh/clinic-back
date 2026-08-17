@@ -56,7 +56,9 @@ export class TypeOrmUserRepository implements UserRepository {
       if (this.isUniqueViolation(error)) {
         const detail = this.getUniqueErrorDetail(error);
         if (detail.includes('phone')) {
-          throw new EmailAlreadyInUseError(user.phone ?? 'Phone already in use');
+          throw new EmailAlreadyInUseError(
+            user.phone ?? 'Phone already in use',
+          );
         }
         if (user.email && detail.includes('email')) {
           throw new EmailAlreadyInUseError(user.email);
@@ -78,7 +80,9 @@ export class TypeOrmUserRepository implements UserRepository {
   private toDomain(entity: UserOrmEntity): User {
     const properties: UserProperties = {
       id: entity.id,
-      username: entity.email ? entity.email.split('@')[0] : `user_${entity.id.slice(0, 8)}`,
+      username: entity.email
+        ? entity.email.split('@')[0]
+        : `user_${entity.id.slice(0, 8)}`,
       employeeCode: `EMP-${entity.id.slice(0, 8).toUpperCase()}`,
       firstName: entity.firstName,
       lastName: entity.lastName,
@@ -125,7 +129,11 @@ export class TypeOrmUserRepository implements UserRepository {
   }
 
   private isUniqueViolation(error: unknown): boolean {
-    if (typeof error !== 'object' || error === null || !('driverError' in error)) {
+    if (
+      typeof error !== 'object' ||
+      error === null ||
+      !('driverError' in error)
+    ) {
       return false;
     }
 
@@ -139,10 +147,14 @@ export class TypeOrmUserRepository implements UserRepository {
   }
 
   private getUniqueErrorDetail(error: unknown): string {
-    if (typeof error !== 'object' || error === null || !('driverError' in error)) {
+    if (
+      typeof error !== 'object' ||
+      error === null ||
+      !('driverError' in error)
+    ) {
       return '';
     }
-    const { driverError } = error as { driverError: unknown };
+    const { driverError } = error;
     if (
       typeof driverError === 'object' &&
       driverError !== null &&

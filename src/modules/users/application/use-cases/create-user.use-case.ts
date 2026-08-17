@@ -5,9 +5,7 @@ import {
   UsernameAlreadyInUseError,
 } from '../../domain/errors/user.errors';
 import { User } from '../../domain/entities/user';
-import {
-  USER_REPOSITORY,
-} from '../../domain/repositories/user.repository';
+import { USER_REPOSITORY } from '../../domain/repositories/user.repository';
 import type { UserRepository } from '../../domain/repositories/user.repository';
 import { USER_ID_GENERATOR } from '../ports/user-id-generator';
 import type { UserIdGenerator } from '../ports/user-id-generator';

@@ -13,15 +13,24 @@ class FakeUserRepository implements UserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return [...this.users.values()].find((user) => user.email === email) ?? null;
+    return (
+      [...this.users.values()].find((user) => user.email === email) ?? null
+    );
   }
 
   async findByUsername(username: string): Promise<User | null> {
-    return [...this.users.values()].find((user) => user.username === username) ?? null;
+    return (
+      [...this.users.values()].find((user) => user.username === username) ??
+      null
+    );
   }
 
   async findByEmployeeCode(employeeCode: string): Promise<User | null> {
-    return [...this.users.values()].find((user) => user.employeeCode === employeeCode) ?? null;
+    return (
+      [...this.users.values()].find(
+        (user) => user.employeeCode === employeeCode,
+      ) ?? null
+    );
   }
 
   async findById(id: string): Promise<User | null> {
@@ -39,7 +48,9 @@ class FakeUserRepository implements UserRepository {
 
 describe('CreateUserUseCase', () => {
   const ids: UserIdGenerator = { generate: () => 'user_1' };
-  const passwords: PasswordHasher = { hash: async (password) => `hashed:${password}` };
+  const passwords: PasswordHasher = {
+    hash: async (password) => `hashed:${password}`,
+  };
   let repository: FakeUserRepository;
   let subject: CreateUserUseCase;
 

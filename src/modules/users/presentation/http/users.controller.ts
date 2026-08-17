@@ -43,7 +43,10 @@ export class UsersController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new user' })
-  @ApiCreatedResponse({ description: 'User created successfully', type: UserResponse })
+  @ApiCreatedResponse({
+    description: 'User created successfully',
+    type: UserResponse,
+  })
   async create(@Body() request: CreateUserRequest): Promise<UserResponse> {
     return UserResponse.from(await this.createUser.execute(request));
   }
@@ -64,7 +67,10 @@ export class UsersController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update a user' })
-  @ApiOkResponse({ description: 'User updated successfully', type: UserResponse })
+  @ApiOkResponse({
+    description: 'User updated successfully',
+    type: UserResponse,
+  })
   async update(
     @Param('id') id: string,
     @Body() request: UpdateUserRequest,

@@ -31,7 +31,6 @@ export interface UserProperties {
   deletedAt: Date | null;
 }
 
-
 export interface RegisterUserProperties {
   id: string;
   username?: string;
@@ -121,7 +120,9 @@ export class User {
     if (username && username.trim()) {
       const normalized = username.trim();
       if (normalized.length < 2 || normalized.length > 100) {
-        throw new InvalidUserError('Username must contain between 2 and 100 characters');
+        throw new InvalidUserError(
+          'Username must contain between 2 and 100 characters',
+        );
       }
       return normalized;
     }
@@ -166,26 +167,39 @@ export class User {
     }
 
     if (input.firstName !== undefined) {
-      this.properties.firstName = User.normalizeName(input.firstName, 'First name');
+      this.properties.firstName = User.normalizeName(
+        input.firstName,
+        'First name',
+      );
     }
 
     if (input.lastName !== undefined) {
-      this.properties.lastName = User.normalizeName(input.lastName, 'Last name');
+      this.properties.lastName = User.normalizeName(
+        input.lastName,
+        'Last name',
+      );
     }
 
     if (input.email !== undefined) {
       this.properties.email = User.normalizeEmail(input.email);
     }
 
-    if (input.phone !== undefined) this.properties.phone = User.normalizeOptionalText(input.phone);
-    if (input.avatar !== undefined) this.properties.avatar = User.normalizeOptionalText(input.avatar);
+    if (input.phone !== undefined)
+      this.properties.phone = User.normalizeOptionalText(input.phone);
+    if (input.avatar !== undefined)
+      this.properties.avatar = User.normalizeOptionalText(input.avatar);
     if (input.passwordHash !== undefined) {
-      this.properties.passwordHash = User.validatePasswordHash(input.passwordHash);
+      this.properties.passwordHash = User.validatePasswordHash(
+        input.passwordHash,
+      );
       this.properties.passwordChangedAt = new Date();
     }
-    if (input.status !== undefined) this.properties.status = User.validateStatus(input.status);
+    if (input.status !== undefined)
+      this.properties.status = User.validateStatus(input.status);
     if (input.departmentId !== undefined) {
-      this.properties.departmentId = User.normalizeOptionalText(input.departmentId);
+      this.properties.departmentId = User.normalizeOptionalText(
+        input.departmentId,
+      );
     }
     if (input.managerId !== undefined) {
       this.properties.managerId = User.normalizeOptionalText(input.managerId);
@@ -196,8 +210,10 @@ export class User {
     if (input.language !== undefined) {
       this.properties.language = User.normalizeName(input.language, 'Language');
     }
-    if (input.lastLoginAt !== undefined) this.properties.lastLoginAt = input.lastLoginAt;
-    if (input.passwordChangedAt !== undefined) this.properties.passwordChangedAt = input.passwordChangedAt;
+    if (input.lastLoginAt !== undefined)
+      this.properties.lastLoginAt = input.lastLoginAt;
+    if (input.passwordChangedAt !== undefined)
+      this.properties.passwordChangedAt = input.passwordChangedAt;
 
     this.properties.updatedAt = new Date();
   }
@@ -250,7 +266,6 @@ export class User {
     return this.properties.passwordHash;
   }
 
-
   get passwordChangedAt(): Date | null {
     return this.properties.passwordChangedAt;
   }
@@ -269,7 +284,9 @@ export class User {
     return normalized;
   }
 
-  private static normalizeOptionalText(value: string | null | undefined): string | null {
+  private static normalizeOptionalText(
+    value: string | null | undefined,
+  ): string | null {
     if (value === null || value === undefined) return null;
     return value.trim() || null;
   }

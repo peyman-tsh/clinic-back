@@ -27,10 +27,6 @@ import { UsersController } from './presentation/http/users.controller';
     { provide: USER_ID_GENERATOR, useClass: UuidUserIdGenerator },
     { provide: USER_PASSWORD_HASHER, useClass: BcryptPasswordHasher },
   ],
-  exports: [
-    USER_REPOSITORY,
-    USER_PASSWORD_HASHER,
-    CreateUserUseCase,
-  ],
+  exports: [USER_REPOSITORY, USER_PASSWORD_HASHER, CreateUserUseCase],
 })
 export class UsersModule {}
