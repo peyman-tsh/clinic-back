@@ -1,11 +1,20 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Branch } from '../../domain/entities/branch';
 import { BranchCodeAlreadyInUseError } from '../../domain/errors/branch.errors';
-import { BRANCH_REPOSITORY, type BranchRepository } from '../../domain/repositories/branch.repository';
-import { CLINIC_REPOSITORY, type ClinicRepository } from '../../../clinics/domain/repositories/clinic.repository';
+import {
+  BRANCH_REPOSITORY,
+  type BranchRepository,
+} from '../../domain/repositories/branch.repository';
+import {
+  CLINIC_REPOSITORY,
+  type ClinicRepository,
+} from '../../../clinics/domain/repositories/clinic.repository';
 import { ClinicNotFoundError } from '../../../clinics/domain/errors/clinic.errors';
 import { BranchOutput, CreateBranchInput } from '../dto/branch.dto';
-import { BRANCH_ID_GENERATOR, type BranchIdGenerator } from '../ports/branch-id-generator';
+import {
+  BRANCH_ID_GENERATOR,
+  type BranchIdGenerator,
+} from '../ports/branch-id-generator';
 
 @Injectable()
 export class CreateBranchUseCase {
@@ -31,7 +40,10 @@ export class CreateBranchUseCase {
     });
 
     if (branch.code) {
-      const existingByCode = await this.branches.findByClinicIdAndCode(branch.clinicId, branch.code);
+      const existingByCode = await this.branches.findByClinicIdAndCode(
+        branch.clinicId,
+        branch.code,
+      );
       if (existingByCode) {
         throw new BranchCodeAlreadyInUseError(branch.code, branch.clinicId);
       }

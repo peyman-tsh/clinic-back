@@ -18,7 +18,10 @@ export class TypeOrmBranchRepository implements BranchRepository {
       await this.branches.save(this.toEntity(branch));
     } catch (error: unknown) {
       if (this.isUniqueViolation(error)) {
-        throw new BranchCodeAlreadyInUseError(branch.code ?? '', branch.clinicId);
+        throw new BranchCodeAlreadyInUseError(
+          branch.code ?? '',
+          branch.clinicId,
+        );
       }
       throw error;
     }
@@ -29,7 +32,10 @@ export class TypeOrmBranchRepository implements BranchRepository {
     return entity ? this.toDomain(entity) : null;
   }
 
-  async findByClinicIdAndCode(clinicId: string, code: string): Promise<Branch | null> {
+  async findByClinicIdAndCode(
+    clinicId: string,
+    code: string,
+  ): Promise<Branch | null> {
     const entity = await this.branches
       .createQueryBuilder('branch')
       .where('branch.clinic_id = :clinicId', { clinicId })
@@ -112,7 +118,11 @@ export class TypeOrmBranchRepository implements BranchRepository {
   }
 
   private isUniqueViolation(error: unknown): boolean {
-    if (typeof error !== 'object' || error === null || !('driverError' in error)) {
+    if (
+      typeof error !== 'object' ||
+      error === null ||
+      !('driverError' in error)
+    ) {
       return false;
     }
 

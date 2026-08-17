@@ -54,7 +54,9 @@ export class BranchesController {
   @Get('clinics/:clinicId/branches')
   @ApiOperation({ summary: 'Get all branches of a specific clinic' })
   @ApiResponse({ status: 200, type: [BranchResponse] })
-  async findByClinic(@Param('clinicId') clinicId: string): Promise<BranchResponse[]> {
+  async findByClinic(
+    @Param('clinicId') clinicId: string,
+  ): Promise<BranchResponse[]> {
     const outputs = await this.findClinicBranches.execute(clinicId);
     return outputs.map((output) => BranchResponse.from(output));
   }

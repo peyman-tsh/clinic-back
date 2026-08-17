@@ -94,7 +94,9 @@ describe('CreateBranchUseCase', () => {
       countryCode: 'DE',
     });
 
-    mockBranchRepository.findByClinicIdAndCode.mockResolvedValue(existingBranch);
+    mockBranchRepository.findByClinicIdAndCode.mockResolvedValue(
+      existingBranch,
+    );
 
     await expect(
       useCase.execute({

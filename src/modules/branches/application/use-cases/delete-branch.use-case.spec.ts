@@ -40,6 +40,8 @@ describe('DeleteBranchUseCase', () => {
   it('throws BranchNotFoundError if branch does not exist', async () => {
     mockBranchRepository.findById.mockResolvedValue(null);
 
-    await expect(useCase.execute('missing-id')).rejects.toThrow(BranchNotFoundError);
+    await expect(useCase.execute('missing-id')).rejects.toThrow(
+      BranchNotFoundError,
+    );
   });
 });

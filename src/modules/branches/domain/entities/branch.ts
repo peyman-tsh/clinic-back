@@ -76,7 +76,11 @@ export class Branch {
       code: Branch.normalizeOptionalText(input.code),
       email: Branch.normalizeEmail(input.email),
       phone: Branch.normalizeOptionalText(input.phone),
-      addressLine1: Branch.validateRequiredText(input.addressLine1, 'Address Line 1', 255),
+      addressLine1: Branch.validateRequiredText(
+        input.addressLine1,
+        'Address Line 1',
+        255,
+      ),
       addressLine2: Branch.normalizeOptionalText(input.addressLine2),
       city: Branch.validateRequiredText(input.city, 'City', 100),
       state: Branch.normalizeOptionalText(input.state),
@@ -110,22 +114,36 @@ export class Branch {
       this.properties.phone = Branch.normalizeOptionalText(input.phone);
     }
     if (input.addressLine1 !== undefined) {
-      this.properties.addressLine1 = Branch.validateRequiredText(input.addressLine1, 'Address Line 1', 255);
+      this.properties.addressLine1 = Branch.validateRequiredText(
+        input.addressLine1,
+        'Address Line 1',
+        255,
+      );
     }
     if (input.addressLine2 !== undefined) {
-      this.properties.addressLine2 = Branch.normalizeOptionalText(input.addressLine2);
+      this.properties.addressLine2 = Branch.normalizeOptionalText(
+        input.addressLine2,
+      );
     }
     if (input.city !== undefined) {
-      this.properties.city = Branch.validateRequiredText(input.city, 'City', 100);
+      this.properties.city = Branch.validateRequiredText(
+        input.city,
+        'City',
+        100,
+      );
     }
     if (input.state !== undefined) {
       this.properties.state = Branch.normalizeOptionalText(input.state);
     }
     if (input.postalCode !== undefined) {
-      this.properties.postalCode = Branch.normalizeOptionalText(input.postalCode);
+      this.properties.postalCode = Branch.normalizeOptionalText(
+        input.postalCode,
+      );
     }
     if (input.countryCode !== undefined) {
-      this.properties.countryCode = Branch.validateCountryCode(input.countryCode);
+      this.properties.countryCode = Branch.validateCountryCode(
+        input.countryCode,
+      );
     }
     if (input.latitude !== undefined) {
       this.properties.latitude = Branch.validateLatitude(input.latitude);
@@ -246,13 +264,19 @@ export class Branch {
     return trimmed;
   }
 
-  private static validateRequiredText(value: string, fieldName: string, maxLength: number): string {
+  private static validateRequiredText(
+    value: string,
+    fieldName: string,
+    maxLength: number,
+  ): string {
     const trimmed = value?.trim();
     if (!trimmed) {
       throw new InvalidBranchError(`${fieldName} is required`);
     }
     if (trimmed.length > maxLength) {
-      throw new InvalidBranchError(`${fieldName} cannot exceed ${maxLength} characters`);
+      throw new InvalidBranchError(
+        `${fieldName} cannot exceed ${maxLength} characters`,
+      );
     }
     return trimmed;
   }
@@ -265,7 +289,9 @@ export class Branch {
     return trimmed;
   }
 
-  private static validateLatitude(latitude: number | null | undefined): number | null {
+  private static validateLatitude(
+    latitude: number | null | undefined,
+  ): number | null {
     if (latitude === null || latitude === undefined) return null;
     if (latitude < -90 || latitude > 90) {
       throw new InvalidBranchError('Latitude must be between -90 and 90');
@@ -273,7 +299,9 @@ export class Branch {
     return latitude;
   }
 
-  private static validateLongitude(longitude: number | null | undefined): number | null {
+  private static validateLongitude(
+    longitude: number | null | undefined,
+  ): number | null {
     if (longitude === null || longitude === undefined) return null;
     if (longitude < -180 || longitude > 180) {
       throw new InvalidBranchError('Longitude must be between -180 and 180');
@@ -281,7 +309,9 @@ export class Branch {
     return longitude;
   }
 
-  private static normalizeEmail(email: string | null | undefined): string | null {
+  private static normalizeEmail(
+    email: string | null | undefined,
+  ): string | null {
     if (email === null || email === undefined) return null;
     const normalized = email.trim().toLowerCase();
     if (!normalized) return null;
@@ -292,7 +322,9 @@ export class Branch {
     return normalized;
   }
 
-  private static normalizeOptionalText(value: string | null | undefined): string | null {
+  private static normalizeOptionalText(
+    value: string | null | undefined,
+  ): string | null {
     if (value === null || value === undefined) return null;
     return value.trim() || null;
   }

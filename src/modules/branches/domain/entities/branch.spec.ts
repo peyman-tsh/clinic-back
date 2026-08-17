@@ -25,13 +25,17 @@ describe('Branch Entity', () => {
 
   it('resolves effective timezone using fallback if branch timezone is null', () => {
     const branchWithoutTz = Branch.create(validBaseInput);
-    expect(branchWithoutTz.getEffectiveTimezone('Europe/Berlin')).toBe('Europe/Berlin');
+    expect(branchWithoutTz.getEffectiveTimezone('Europe/Berlin')).toBe(
+      'Europe/Berlin',
+    );
 
     const branchWithTz = Branch.create({
       ...validBaseInput,
       timezone: 'Europe/London',
     });
-    expect(branchWithTz.getEffectiveTimezone('Europe/Berlin')).toBe('Europe/London');
+    expect(branchWithTz.getEffectiveTimezone('Europe/Berlin')).toBe(
+      'Europe/London',
+    );
   });
 
   it('throws an error if countryCode is invalid', () => {

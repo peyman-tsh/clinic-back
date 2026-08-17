@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { BranchNotFoundError } from '../../domain/errors/branch.errors';
-import { BRANCH_REPOSITORY, type BranchRepository } from '../../domain/repositories/branch.repository';
+import {
+  BRANCH_REPOSITORY,
+  type BranchRepository,
+} from '../../domain/repositories/branch.repository';
 import { BranchOutput } from '../dto/branch.dto';
 
 @Injectable()
