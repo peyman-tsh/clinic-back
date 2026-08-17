@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClinicNotFoundError } from '../../domain/errors/clinic.errors';
-import { CLINIC_REPOSITORY, type ClinicRepository } from '../../domain/repositories/clinic.repository';
+import {
+  CLINIC_REPOSITORY,
+  type ClinicRepository,
+} from '../../domain/repositories/clinic.repository';
 
 @Injectable()
 export class DeleteClinicUseCase {

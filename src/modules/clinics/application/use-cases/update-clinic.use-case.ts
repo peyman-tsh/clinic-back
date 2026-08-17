@@ -1,6 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ClinicNotFoundError, ClinicSlugAlreadyInUseError } from '../../domain/errors/clinic.errors';
-import { CLINIC_REPOSITORY, type ClinicRepository } from '../../domain/repositories/clinic.repository';
+import {
+  ClinicNotFoundError,
+  ClinicSlugAlreadyInUseError,
+} from '../../domain/errors/clinic.errors';
+import {
+  CLINIC_REPOSITORY,
+  type ClinicRepository,
+} from '../../domain/repositories/clinic.repository';
 import { ClinicOutput, UpdateClinicInput } from '../dto/clinic.dto';
 
 @Injectable()

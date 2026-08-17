@@ -56,7 +56,9 @@ export class Clinic {
   static create(input: CreateClinicProperties): Clinic {
     const now = new Date();
     const name = Clinic.validateName(input.name);
-    const slug = input.slug ? Clinic.validateSlug(input.slug) : Clinic.generateSlug(name);
+    const slug = input.slug
+      ? Clinic.validateSlug(input.slug)
+      : Clinic.generateSlug(name);
 
     return new Clinic({
       id: input.id,
@@ -88,7 +90,9 @@ export class Clinic {
       this.properties.slug = Clinic.validateSlug(input.slug);
     }
     if (input.description !== undefined) {
-      this.properties.description = Clinic.normalizeOptionalText(input.description);
+      this.properties.description = Clinic.normalizeOptionalText(
+        input.description,
+      );
     }
     if (input.logoUrl !== undefined) {
       this.properties.logoUrl = Clinic.normalizeOptionalText(input.logoUrl);
@@ -192,7 +196,9 @@ export class Clinic {
       throw new InvalidClinicError('Clinic slug is required');
     }
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(trimmed)) {
-      throw new InvalidClinicError('Clinic slug must be URL-friendly (lowercase letters, numbers, hyphens)');
+      throw new InvalidClinicError(
+        'Clinic slug must be URL-friendly (lowercase letters, numbers, hyphens)',
+      );
     }
     if (trimmed.length > 150) {
       throw new InvalidClinicError('Clinic slug cannot exceed 150 characters');
@@ -201,15 +207,19 @@ export class Clinic {
   }
 
   private static generateSlug(name: string): string {
-    return name
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/[\s_]+/g, '-')
-      .replace(/^-+|-+$/g, '') || 'clinic';
+    return (
+      name
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/[\s_]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'clinic'
+    );
   }
 
-  private static normalizeEmail(email: string | null | undefined): string | null {
+  private static normalizeEmail(
+    email: string | null | undefined,
+  ): string | null {
     if (email === null || email === undefined) return null;
     const normalized = email.trim().toLowerCase();
     if (!normalized) return null;
@@ -220,7 +230,9 @@ export class Clinic {
     return normalized;
   }
 
-  private static normalizeOptionalText(value: string | null | undefined): string | null {
+  private static normalizeOptionalText(
+    value: string | null | undefined,
+  ): string | null {
     if (value === null || value === undefined) return null;
     return value.trim() || null;
   }

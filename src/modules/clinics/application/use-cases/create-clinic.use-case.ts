@@ -1,9 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Clinic } from '../../domain/entities/clinic';
 import { ClinicSlugAlreadyInUseError } from '../../domain/errors/clinic.errors';
-import { CLINIC_REPOSITORY, type ClinicRepository } from '../../domain/repositories/clinic.repository';
+import {
+  CLINIC_REPOSITORY,
+  type ClinicRepository,
+} from '../../domain/repositories/clinic.repository';
 import { ClinicOutput, CreateClinicInput } from '../dto/clinic.dto';
-import { CLINIC_ID_GENERATOR, type ClinicIdGenerator } from '../ports/clinic-id-generator';
+import {
+  CLINIC_ID_GENERATOR,
+  type ClinicIdGenerator,
+} from '../ports/clinic-id-generator';
 
 @Injectable()
 export class CreateClinicUseCase {

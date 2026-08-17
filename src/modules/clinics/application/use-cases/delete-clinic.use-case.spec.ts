@@ -31,6 +31,8 @@ describe('DeleteClinicUseCase', () => {
   it('throws ClinicNotFoundError if clinic does not exist', async () => {
     mockRepository.findById.mockResolvedValue(null);
 
-    await expect(useCase.execute('non-existent')).rejects.toThrow(ClinicNotFoundError);
+    await expect(useCase.execute('non-existent')).rejects.toThrow(
+      ClinicNotFoundError,
+    );
   });
 });

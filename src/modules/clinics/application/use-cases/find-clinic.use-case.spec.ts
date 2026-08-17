@@ -35,6 +35,8 @@ describe('FindClinicUseCase', () => {
   it('throws ClinicNotFoundError if clinic does not exist', async () => {
     mockRepository.findById.mockResolvedValue(null);
 
-    await expect(useCase.execute('missing-id')).rejects.toThrow(ClinicNotFoundError);
+    await expect(useCase.execute('missing-id')).rejects.toThrow(
+      ClinicNotFoundError,
+    );
   });
 });

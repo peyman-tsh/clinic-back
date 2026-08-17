@@ -1,5 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CLINIC_REPOSITORY, type ClinicRepository } from '../../domain/repositories/clinic.repository';
+import {
+  CLINIC_REPOSITORY,
+  type ClinicRepository,
+} from '../../domain/repositories/clinic.repository';
 import { ClinicOutput } from '../dto/clinic.dto';
 
 @Injectable()
